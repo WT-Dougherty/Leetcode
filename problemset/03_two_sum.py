@@ -23,12 +23,15 @@ NOTE:
 - There are edge cases that fail. For example, if array is [3, 3] and
   target is 6, algorithm returns [0, 0]
 
+
 Since edge cases break my current algorithm, I'm going to try something new.
 Hash Map Approach:
 - I will iterate through the input array, checking to see if the desired value is in
   a hash-map:
     - If it is, I return the value corresponding to that key with the current index
     - If it isn't, I add the current value to the hashmap
+
+This solution is O(n) since hash lookups are constant.
 
 """
 if False:

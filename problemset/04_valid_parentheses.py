@@ -1,5 +1,5 @@
 """
-Problem: Valid Parentheses (Stack)
+Problem: Valid Parentheses
 ----------------------------------
 Given a string s containing only '()[]{}', determine if the input string is valid.
 
@@ -7,27 +7,46 @@ Rules:
 - Open brackets must be closed by the same type of brackets.
 - Open brackets must be closed in the correct order.
 
-Approach:
-- Use a stack; push opening, on closing check top matches.
+Approach: Create a Stack
+- The stack will begin empty, and open parentheses will be pushed to the stack.
+- There will be a lookup hash map, where the keys are the closing brackets and the values are the opening brackets
+- There will also be a set containing the three opening brackets. This will be used to check if the new character should be added to the stack.
 
-Time: O(n) | Space: O(n)
+Three input cases:
+Opening bracket -> add to stack
+Closing bracket -> check if map[char] == stack.pop() ? continue : return False
+Other character -> return False
+
 """
+from queue import Empty
+
+
 def is_valid(s: str) -> bool:
-    pairs = {')':'(', ']':'[', '}':'{'}
     stack = []
-    for ch in s:
-        if ch in '([{':
-            stack.append(ch)
-        else:
-            if not stack or stack[-1] != pairs.get(ch, None):
+    lookup = {")": "(",
+              "}": "{",
+              "]": "["
+    }
+    stack_sigma = {"(", "[", "{"}
+
+    for c in s:
+        if c in stack_sigma:
+            stack.append(c)
+        elif c in lookup.keys():
+            if stack.pop() == lookup[c]:
+                continue
+            else:
                 return False
-            stack.pop()
-    return not stack
+        else:
+            return False
+    if stack == []: return True
+    return False
 
 def _test():
     assert is_valid("()")
     assert is_valid("()[]{}")
     assert not is_valid("(]")
+    assert not is_valid("g{}[]")
     assert not is_valid("([)]")
     assert is_valid("{[]}")
 
