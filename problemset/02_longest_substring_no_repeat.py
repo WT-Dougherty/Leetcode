@@ -9,6 +9,8 @@ Approach (Sliding Window + last-seen index):
 
 Time: O(n) | Space: O(min(n, Σ))
 """
+
+
 def length_of_longest_substring(s: str) -> int:
     seen = set()
     left, max_len = 0, 0
@@ -17,8 +19,9 @@ def length_of_longest_substring(s: str) -> int:
             seen.remove(s[left])
             left += 1
         seen.add(s[i])
-        max_len = max(max_len, i-left+1)
+        max_len = max(max_len, i - left + 1)
     return max_len
+
 
 def _test():
     assert length_of_longest_substring("abcabcbb") == 3
@@ -26,6 +29,7 @@ def _test():
     assert length_of_longest_substring("pwwkew") == 3
     assert length_of_longest_substring("") == 0
     assert length_of_longest_substring("dvdf") == 3
+
 
 if __name__ == "__main__":
     _test()

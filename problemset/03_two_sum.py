@@ -34,21 +34,22 @@ Hash Map Approach:
 This solution is O(n) since hash lookups are constant.
 
 """
+
 if False:
     # helper functions
     def binary_search(nums: list[int], k: int, l: int, r: int):
         # k not found
         if l > r:
             return -1
-        
+
         # alg logic
-        mid = (r+l) // 2
+        mid = (r + l) // 2
         if nums[mid] == k:
             return mid
         elif nums[mid] > k:
-            return binary_search(nums, k, l, mid-1)
+            return binary_search(nums, k, l, mid - 1)
         else:
-            return binary_search(nums, k, mid+1, r)
+            return binary_search(nums, k, mid + 1, r)
 
     # final alg
     def two_sum(nums: list[int], target: int) -> list[int]:
@@ -57,13 +58,14 @@ if False:
 
         for i in range(len(sorted_nums)):
             k = target - sorted_nums[i]
-            index = binary_search(sorted_nums, k, i+1, len(sorted_nums)-1)
+            index = binary_search(sorted_nums, k, i + 1, len(sorted_nums) - 1)
             print(i, index)
             if index > 0 and index != i:
                 rv = [nums.index(sorted_nums[i]), nums.index(sorted_nums[index])]
                 rv.sort()
                 return rv
         return [-1, -1]
+
 
 def two_sum(nums: list[int], target: int) -> list[int]:
     seen = dict()
@@ -74,11 +76,13 @@ def two_sum(nums: list[int], target: int) -> list[int]:
         seen[n] = i
     return [-1, -1]
 
+
 def _test():
-    assert two_sum([2,7,11,15], 9) == [0,1]
-    assert two_sum([3, -1, 17, 2,7, -9, 11, 15, 10], 19) == [2,3]
-    assert two_sum([3,2,4], 6) == [1,2]
-    assert two_sum([3,3], 6) == [0,1]
+    assert two_sum([2, 7, 11, 15], 9) == [0, 1]
+    assert two_sum([3, -1, 17, 2, 7, -9, 11, 15, 10], 19) == [2, 3]
+    assert two_sum([3, 2, 4], 6) == [1, 2]
+    assert two_sum([3, 3], 6) == [0, 1]
+
 
 if __name__ == "__main__":
     _test()

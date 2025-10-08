@@ -18,15 +18,13 @@ Closing bracket -> check if map[char] == stack.pop() ? continue : return False
 Other character -> return False
 
 """
+
 from queue import Empty
 
 
 def is_valid(s: str) -> bool:
     stack = []
-    lookup = {")": "(",
-              "}": "{",
-              "]": "["
-    }
+    lookup = {")": "(", "}": "{", "]": "["}
     stack_sigma = {"(", "[", "{"}
 
     for c in s:
@@ -39,8 +37,10 @@ def is_valid(s: str) -> bool:
                 return False
         else:
             return False
-    if stack == []: return True
+    if stack == []:
+        return True
     return False
+
 
 def _test():
     assert is_valid("()")
@@ -49,6 +49,7 @@ def _test():
     assert not is_valid("g{}[]")
     assert not is_valid("([)]")
     assert is_valid("{[]}")
+
 
 if __name__ == "__main__":
     _test()
