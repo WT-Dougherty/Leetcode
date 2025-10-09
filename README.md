@@ -1,6 +1,6 @@
 # NeetCode 150 — Checklist & Table of Contents
 
-_Total problems: **152**_
+_Total problems: **151**_
 
 > Check items as you complete them. Each link opens that problem’s `problem.md` inside this repo.
 
@@ -13,7 +13,7 @@ Generative Progress: Through Section 6
 - [ ] [Two Sum](01_Arrays_And_Hashing/two-sum/problem.md)
 - [x] [Group Anagrams](01_Arrays_And_Hashing/group-anagrams/problem.md)
 - [ ] [Top K Frequent Elements](01_Arrays_And_Hashing/top-k-frequent-elements/problem.md)
-- [ ] [Product of Array Except Self](01_Arrays_And_Hashing/product-of-array-except-self/problem.md)
+- [x] [Product of Array Except Self](01_Arrays_And_Hashing/product-of-array-except-self/problem.md)
 - [ ] [Valid Sudoku](01_Arrays_And_Hashing/valid-sudoku/problem.md)
 - [x] [Encode And Decode Strings](01_Arrays_And_Hashing/encode-and-decode-strings/problem.md)
 - [x] [Longest Consecutive Sequence](01_Arrays_And_Hashing/longest-consecutive-sequence/problem.md)
@@ -196,7 +196,6 @@ Generative Progress: Through Section 6
 - [ ] [Set Matrix Zeroes](17_Math_&_Geometry/set-matrix-zeroes/problem.md)
 - [ ] [Happy Number](17_Math_&_Geometry/happy-number/problem.md)
 - [ ] [Plus One](17_Math_&_Geometry/plus-one/problem.md)
-- [ ] [Pow(x, n)](17_Math_&_Geometry/pow-x-n/problem.md)
 - [ ] [Multiply Strings](17_Math_&_Geometry/multiply-strings/problem.md)
 - [ ] [Detect Squares](17_Math_&_Geometry/detect-squares/problem.md)
 

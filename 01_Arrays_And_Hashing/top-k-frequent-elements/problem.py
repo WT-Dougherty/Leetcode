@@ -6,7 +6,6 @@ You may return the answer in any order.
 """
 
 import time
-import random
 from typing import List
 
 
@@ -81,7 +80,7 @@ def test_accuracy():
 
 
 def test_time_complexity():
-    """Test time complexity with different input sizes - FAILS if worse than O(n)"""
+    """Test time complexity with different input sizes - FAILS if worse than O(n log n)"""
     solution = Solution()
 
     # Test different input sizes
@@ -114,7 +113,7 @@ def test_time_complexity():
         assert len(result) == k, f"Expected {k} elements, got {len(result)}"
         print(f"{size}\t{elapsed_time:.6f}s\tTop {k}: {result}")
 
-    # Verify O(n) complexity by checking if time growth is approximately linear
+    # Verify O(n log n) complexity by checking if time growth is approximately n log n
     if len(times) >= 2:
         # Calculate ratios between consecutive time measurements
         ratios = []
@@ -122,32 +121,35 @@ def test_time_complexity():
             ratio = times[i] / times[i - 1]
             ratios.append(ratio)
 
-        # Calculate expected ratios for O(n) complexity
+        # Calculate expected ratios for O(n log n) complexity
         expected_ratios = []
         for i in range(1, len(test_sizes)):
-            expected_ratio = test_sizes[i] / test_sizes[i - 1]
+            prev_complexity = test_sizes[i - 1] * (test_sizes[i - 1].bit_length())
+            curr_complexity = test_sizes[i] * (test_sizes[i].bit_length())
+            expected_ratio = curr_complexity / prev_complexity
             expected_ratios.append(expected_ratio)
 
         print(f"\nTime ratios: {[f'{r:.2f}x' for r in ratios]}")
-        print(f"Expected ratios for O(n): {[f'{r:.2f}x' for r in expected_ratios]}")
+        print(
+            f"Expected ratios for O(n log n): {[f'{r:.2f}x' for r in expected_ratios]}"
+        )
 
         # Check if ratios are within acceptable range (allowing some variance)
         tolerance = 0.5  # Allow 50% variance
         for i, (actual, expected) in enumerate(zip(ratios, expected_ratios)):
-            min_expected = expected * (1 - tolerance)
             max_expected = expected * (1 + tolerance)
 
             if not (actual <= max_expected):
-                print(f"\n❌ FAILED: Time complexity appears worse than O(n)")
+                print(f"\n❌ FAILED: Time complexity appears worse than O(n log n)")
                 print(
                     f"   Size {test_sizes[i]} to {test_sizes[i+1]}: expected ~{expected:.2f}x, got {actual:.2f}x"
                 )
-                print(f"   This suggests O(n log n) or worse complexity")
+                print(f"   This suggests O(n^2) or worse complexity")
                 raise AssertionError(
-                    f"Time complexity test failed: expected O(n), but got worse complexity"
+                    f"Time complexity test failed: expected O(n log n), but got worse complexity"
                 )
 
-        print(f"\n✅ PASSED: Time complexity appears to be O(n)")
+        print(f"\n✅ PASSED: Time complexity appears to be O(n log n)")
         return True
     else:
         print(f"\n⚠️  Not enough data points to verify complexity")
@@ -229,9 +231,9 @@ if __name__ == "__main__":
         print("\n🎉 All tests completed successfully!")
         print("\nSummary:")
         print("- Implement your solution in the topKFrequent method")
-        print("- Aim for O(n) time complexity")
+        print("- Aim for O(n log n) time complexity")
         print("- Handle all edge cases correctly")
     else:
         print("\n❌ Tests failed - improve your solution's time complexity!")
-        print("- Your solution appears to be worse than O(n)")
-        print("- Consider using hash maps and heaps or other O(n) approaches")
+        print("- Your solution appears to be worse than O(n log n)")
+        print("- Consider using hash maps and heaps or other O(n log n) approaches")

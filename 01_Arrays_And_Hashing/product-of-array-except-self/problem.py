@@ -14,7 +14,21 @@ from typing import List
 
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
-        pass
+        answer = []
+
+        # write the left side product
+        lp = 1
+        for i in range(len(nums)):
+            answer.append(lp)
+            lp *= nums[i]
+
+        # write the right side product
+        rp = 1
+        for i in range(len(nums) - 1, -1, -1):
+            answer[i] *= rp
+            rp *= nums[i]
+
+        return answer
 
 
 def test_accuracy():

@@ -1,5 +1,8 @@
 # IDE environment settings (Black Formatter)
 .vscode/
 
+# Mac OS
+.DS_Store
+
 # Old Problemset
 XX_Random_Assortment/
