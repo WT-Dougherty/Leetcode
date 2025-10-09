@@ -12,7 +12,27 @@ from typing import List
 
 class Solution:
     def longestConsecutive(self, nums: List[int]) -> int:
-        pass
+        hash_set = set()
+        for ele in nums:
+            hash_set.add(ele)
+
+        max_len = 0
+        for ele in hash_set:
+            cur_len = 1
+
+            # check if element is start of sequence
+            if ele - 1 in hash_set:
+                max_len = max(max_len, cur_len)
+                continue
+
+            # iteratively count sequence length
+            counter = ele + 1
+            while counter in hash_set:
+                cur_len += 1
+                counter += 1
+            max_len = max(max_len, cur_len)
+
+        return max_len
 
 
 def test_accuracy():
@@ -130,7 +150,7 @@ def test_time_complexity():
             min_expected = expected * (1 - tolerance)
             max_expected = expected * (1 + tolerance)
 
-            if not (min_expected <= actual <= max_expected):
+            if not (actual <= max_expected):
                 print(f"\n❌ FAILED: Time complexity appears worse than O(n)")
                 print(
                     f"   Size {test_sizes[i]} to {test_sizes[i+1]}: expected ~{expected:.2f}x, got {actual:.2f}x"

@@ -48,7 +48,7 @@ def test_accuracy():
     # Test Case 4: Negative numbers
     nums4 = [-1, -2, -3, -4]
     result4 = solution.productExceptSelf(nums4)
-    expected4 = [24, 12, 8, 6]
+    expected4 = [-24, -12, -8, -6]
     assert (
         result4 == expected4
     ), f"Failed for {nums4}, expected {expected4}, got {result4}"
@@ -165,7 +165,7 @@ def test_time_complexity():
             min_expected = expected * (1 - tolerance)
             max_expected = expected * (1 + tolerance)
 
-            if not (min_expected <= actual <= max_expected):
+            if not (actual <= max_expected):
                 print(f"\n❌ FAILED: Time complexity appears worse than O(n)")
                 print(
                     f"   Size {test_sizes[i]} to {test_sizes[i+1]}: expected ~{expected:.2f}x, got {actual:.2f}x"

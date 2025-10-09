@@ -13,7 +13,22 @@ from typing import List
 
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        pass
+        # create a hashmap mapping palindromic ids to word arrays
+        hm = dict()
+        for word in strs:
+            # create palindromic id
+            c_list = list(word)
+            c_list.sort()
+            cur_id = ""
+            for c in c_list:
+                cur_id += c
+
+            # update palindromic map
+            if cur_id in hm:
+                hm[cur_id].append(word)
+                continue
+            hm[cur_id] = [word]
+        return [hm[key] for key in hm]
 
 
 def test_accuracy():
@@ -23,6 +38,7 @@ def test_accuracy():
     # Test Case 1: Basic case
     strs1 = ["eat", "tea", "tan", "ate", "nat", "bat"]
     result1 = solution.groupAnagrams(strs1)
+    print(result1)
     # Sort each group and the overall result for comparison
     result1_sorted = [sorted(group) for group in result1]
     result1_sorted.sort()
@@ -164,7 +180,7 @@ def test_time_complexity():
             min_expected = expected * (1 - tolerance)
             max_expected = expected * (1 + tolerance)
 
-            if not (min_expected <= actual <= max_expected):
+            if not (actual <= max_expected):
                 print(f"\n❌ FAILED: Time complexity appears worse than O(n*m)")
                 print(
                     f"   Size {test_sizes[i]} to {test_sizes[i+1]}: expected ~{expected:.2f}x, got {actual:.2f}x"

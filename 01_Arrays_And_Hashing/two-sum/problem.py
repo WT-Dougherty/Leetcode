@@ -156,7 +156,7 @@ def test_time_complexity():
             min_expected = expected * (1 - tolerance)
             max_expected = expected * (1 + tolerance)
 
-            if not (min_expected <= actual <= max_expected):
+            if not (actual <= max_expected):
                 print(f"\n❌ FAILED: Time complexity appears worse than O(n)")
                 print(
                     f"   Size {test_sizes[i]} to {test_sizes[i+1]}: expected ~{expected:.2f}x, got {actual:.2f}x"

@@ -11,12 +11,12 @@ Generative Progress: Through Section 6
 - [x] [Contains Duplicate](01_Arrays_And_Hashing/contains-duplicate/problem.md)
 - [ ] [Valid Anagram](01_Arrays_And_Hashing/valid-anagram/problem.md)
 - [ ] [Two Sum](01_Arrays_And_Hashing/two-sum/problem.md)
-- [ ] [Group Anagrams](01_Arrays_And_Hashing/group-anagrams/problem.md)
+- [x] [Group Anagrams](01_Arrays_And_Hashing/group-anagrams/problem.md)
 - [ ] [Top K Frequent Elements](01_Arrays_And_Hashing/top-k-frequent-elements/problem.md)
 - [ ] [Product of Array Except Self](01_Arrays_And_Hashing/product-of-array-except-self/problem.md)
 - [ ] [Valid Sudoku](01_Arrays_And_Hashing/valid-sudoku/problem.md)
-- [ ] [Encode And Decode Strings](01_Arrays_And_Hashing/encode-and-decode-strings/problem.md)
-- [ ] [Longest Consecutive Sequence](01_Arrays_And_Hashing/longest-consecutive-sequence/problem.md)
+- [x] [Encode And Decode Strings](01_Arrays_And_Hashing/encode-and-decode-strings/problem.md)
+- [x] [Longest Consecutive Sequence](01_Arrays_And_Hashing/longest-consecutive-sequence/problem.md)
 
 ## Two Pointers (5)
 
