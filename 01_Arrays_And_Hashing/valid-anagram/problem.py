@@ -2,18 +2,32 @@
 Valid Anagram - LeetCode Problem 242
 
 Given two strings s and t, return true if t is an anagram of s, and false otherwise.
-An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, 
+An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase,
 typically using all the original letters exactly once.
 """
 
 import time
 import random
-from typing import List
 
 
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
-        pass
+        hm = dict()
+        for c in s:
+            if c in hm:
+                hm[c] += 1
+                continue
+            hm[c] = 1
+
+        for c in t:
+            if c not in hm:
+                return False
+            hm[c] -= 1
+
+        for key in hm:
+            if hm[key] != 0:
+                return False
+        return True
 
 
 def test_accuracy():
@@ -78,10 +92,10 @@ def test_time_complexity():
     for size in test_sizes:
         # Generate test data - create anagram pairs
         chars = list("abcdefghijklmnopqrstuvwxyz")
-        s = ''.join(random.choices(chars, k=size))
+        s = "".join(random.choices(chars, k=size))
         t = list(s)
         random.shuffle(t)
-        t = ''.join(t)
+        t = "".join(t)
 
         # Test approach
         start_time = time.time()
@@ -96,30 +110,34 @@ def test_time_complexity():
         # Calculate ratios between consecutive time measurements
         ratios = []
         for i in range(1, len(times)):
-            ratio = times[i] / times[i-1]
+            ratio = times[i] / times[i - 1]
             ratios.append(ratio)
-        
+
         # Calculate expected ratios for O(n) complexity
         expected_ratios = []
         for i in range(1, len(test_sizes)):
-            expected_ratio = test_sizes[i] / test_sizes[i-1]
+            expected_ratio = test_sizes[i] / test_sizes[i - 1]
             expected_ratios.append(expected_ratio)
-        
+
         print(f"\nTime ratios: {[f'{r:.2f}x' for r in ratios]}")
         print(f"Expected ratios for O(n): {[f'{r:.2f}x' for r in expected_ratios]}")
-        
+
         # Check if ratios are within acceptable range (allowing some variance)
         tolerance = 0.5  # Allow 50% variance
         for i, (actual, expected) in enumerate(zip(ratios, expected_ratios)):
             min_expected = expected * (1 - tolerance)
             max_expected = expected * (1 + tolerance)
-            
+
             if not (actual <= max_expected):
                 print(f"\n❌ FAILED: Time complexity appears worse than O(n)")
-                print(f"   Size {test_sizes[i]} to {test_sizes[i+1]}: expected ~{expected:.2f}x, got {actual:.2f}x")
+                print(
+                    f"   Size {test_sizes[i]} to {test_sizes[i+1]}: expected ~{expected:.2f}x, got {actual:.2f}x"
+                )
                 print(f"   This suggests O(n log n) or worse complexity")
-                raise AssertionError(f"Time complexity test failed: expected O(n), but got worse complexity")
-        
+                raise AssertionError(
+                    f"Time complexity test failed: expected O(n), but got worse complexity"
+                )
+
         print(f"\n✅ PASSED: Time complexity appears to be O(n)")
         return True
     else:
@@ -170,10 +188,10 @@ def benchmark_solution():
 
     # Large dataset - anagrams
     chars = list("abcdefghijklmnopqrstuvwxyz")
-    s = ''.join(random.choices(chars, k=100000))
+    s = "".join(random.choices(chars, k=100000))
     t = list(s)
     random.shuffle(t)
-    t = ''.join(t)
+    t = "".join(t)
 
     start_time = time.time()
     result1 = solution.isAnagram(s, t)
@@ -183,8 +201,8 @@ def benchmark_solution():
     print(f"Time: {time1:.6f}s, Result: {result1}")
 
     # Large dataset - not anagrams
-    s2 = ''.join(random.choices(chars, k=100000))
-    t2 = ''.join(random.choices(chars, k=100000))
+    s2 = "".join(random.choices(chars, k=100000))
+    t2 = "".join(random.choices(chars, k=100000))
 
     start_time = time.time()
     result2 = solution.isAnagram(s2, t2)

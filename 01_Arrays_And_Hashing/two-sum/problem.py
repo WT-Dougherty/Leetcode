@@ -7,13 +7,23 @@ solution, and you may not use the same element twice. You can return the answer 
 """
 
 import time
-import random
 from typing import List
 
 
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-        pass
+        hm = dict()
+        for i in range(len(nums)):
+            if target - nums[i] in hm:
+                return [hm[target - nums[i]], i]
+            hm[nums[i]] = i
+        return [-1, -1]
+
+    def BruteForce(self, nums: List[int], target: int) -> List[int]:
+        for i in range(len(nums)):
+            for j in range(i + 1, len(nums)):
+                if nums[i] + nums[j] == target:
+                    return [i, j]
 
 
 def test_accuracy():
@@ -53,7 +63,7 @@ def test_accuracy():
     ], f"Failed for nums={nums4}, target={target4}, got {result4}"
 
     # Test Case 5: Zero target
-    nums5, target5 = [1, 2, 3, -1, -2], 0
+    nums5, target5 = [1, 2, 3, -9, -2], 0
     result5 = solution.twoSum(nums5, target5)
     assert sorted(result5) == [
         1,
@@ -61,15 +71,15 @@ def test_accuracy():
     ], f"Failed for nums={nums5}, target={target5}, got {result5}"
 
     # Test Case 6: Large numbers
-    nums6, target6 = [1000000000, -1000000000, 2, 3], 2
+    nums6, target6 = [1000000000, -1000000000, 2, 3], 0
     result6 = solution.twoSum(nums6, target6)
     assert sorted(result6) == [
         0,
-        2,
+        1,
     ], f"Failed for nums={nums6}, target={target6}, got {result6}"
 
     # Test Case 7: Duplicate values
-    nums7, target7 = [1, 2, 2, 3], 4
+    nums7, target7 = [1, 2, 2, 5], 4
     result7 = solution.twoSum(nums7, target7)
     assert sorted(result7) == [
         1,
@@ -77,15 +87,15 @@ def test_accuracy():
     ], f"Failed for nums={nums7}, target={target7}, got {result7}"
 
     # Test Case 8: First and last
-    nums8, target8 = [1, 2, 3, 4, 5], 6
+    nums8, target8 = [1, 2, 3, 4, 6], 6
     result8 = solution.twoSum(nums8, target8)
     assert sorted(result8) == [
-        0,
-        4,
+        1,
+        3,
     ], f"Failed for nums={nums8}, target={target8}, got {result8}"
 
-    # Test Case 9: Adjacent elements
-    nums9, target9 = [1, 2, 3, 4, 5], 7
+    # Test Case 9: Adjacent elements (unique solution)
+    nums9, target9 = [1, 2, 3, 4, 8], 7
     result9 = solution.twoSum(nums9, target9)
     assert sorted(result9) == [
         2,
@@ -116,9 +126,10 @@ def test_time_complexity():
     print("-" * 40)
 
     for size in test_sizes:
-        # Generate test data - ensure solution exists
+        # Generate test data - force worst-case behavior for brute force
+        # Solution is at the end, forcing algorithm to check many pairs
         nums = list(range(size))
-        target = nums[0] + nums[size - 1]  # First + last element
+        target = nums[size - 2] + nums[size - 1]  # Last two elements
 
         # Test approach
         start_time = time.time()
@@ -151,7 +162,7 @@ def test_time_complexity():
         print(f"Expected ratios for O(n): {[f'{r:.2f}x' for r in expected_ratios]}")
 
         # Check if ratios are within acceptable range (allowing some variance)
-        tolerance = 0.5  # Allow 50% variance
+        tolerance = 0.5  # Allow 50% variance for O(n) detection
         for i, (actual, expected) in enumerate(zip(ratios, expected_ratios)):
             min_expected = expected * (1 - tolerance)
             max_expected = expected * (1 + tolerance)

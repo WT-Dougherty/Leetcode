@@ -7,11 +7,26 @@ You may return the answer in any order.
 
 import time
 from typing import List
+import heapq
 
 
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-        pass
+        # create frequency map
+        freq_map = dict()
+        for num in nums:
+            if num in freq_map:
+                freq_map[num] += 1
+                continue
+            freq_map[num] = 1
+
+        # convert frequency map to a max heap
+        h = []
+        for key in freq_map:
+            heapq.heappush(h, (-freq_map[key], key))
+
+        # return k largest
+        return [ele[1] for ele in heapq.nsmallest(k, h)]
 
 
 def test_accuracy():
@@ -92,14 +107,15 @@ def test_time_complexity():
     print("-" * 40)
 
     for size in test_sizes:
-        # Generate test data - create array with some repeated elements
+        # Generate test data - create array with linear size growth
         nums = []
-        # Add some frequent elements
+        # Add some frequent elements (linear growth)
         for i in range(size // 10):
-            nums.extend([i] * (i + 1))  # Element i appears i+1 times
+            nums.extend([i] * 10)  # Each element appears 10 times
 
-        # Add some unique elements
-        for i in range(size // 10, size):
+        # Add some unique elements to reach target size
+        remaining = size - len(nums)
+        for i in range(size // 10, size // 10 + remaining):
             nums.append(i)
 
         k = 5  # Always ask for top 5
@@ -122,10 +138,12 @@ def test_time_complexity():
             ratios.append(ratio)
 
         # Calculate expected ratios for O(n log n) complexity
+        import math
+
         expected_ratios = []
         for i in range(1, len(test_sizes)):
-            prev_complexity = test_sizes[i - 1] * (test_sizes[i - 1].bit_length())
-            curr_complexity = test_sizes[i] * (test_sizes[i].bit_length())
+            prev_complexity = test_sizes[i - 1] * math.log2(test_sizes[i - 1])
+            curr_complexity = test_sizes[i] * math.log2(test_sizes[i])
             expected_ratio = curr_complexity / prev_complexity
             expected_ratios.append(expected_ratio)
 
