@@ -16,17 +16,35 @@ _Total problems: **151**_
 - [x] [Encode And Decode Strings](01_Arrays_And_Hashing/encode-and-decode-strings/problem.md)
 - [x] [Longest Consecutive Sequence](01_Arrays_And_Hashing/longest-consecutive-sequence/problem.md)
 
+_Some Notes on This Section:_
+Hash maps provide constant time element lookup; you can check that you have come across specific elements in constant time. If counting element frequency, use a hash map. If you're checking element existence, use a set (also hashed elements, so constant time lookup)
+
 ## Two Pointers (5)
 
-- [ ] [Valid Palindrome](02_Two_Pointers/valid-palindrome/problem.md)
-- [ ] [Two Sum II Input Array Is Sorted](02_Two_Pointers/two-sum-ii-input-array-is-sorted/problem.md)
-- [ ] [3Sum](02_Two_Pointers/3sum/problem.md)
-- [ ] [Container With Most Water](02_Two_Pointers/container-with-most-water/problem.md)
-- [ ] [Trapping Rain Water](02_Two_Pointers/trapping-rain-water/problem.md)
+- [x] [Valid Palindrome](02_Two_Pointers/valid-palindrome/problem.md)
+- [x] [Two Sum II Input Array Is Sorted](02_Two_Pointers/two-sum-ii-input-array-is-sorted/problem.md)
+- [x] [3Sum](02_Two_Pointers/3sum/problem.md)
+- [x] [Container With Most Water](02_Two_Pointers/container-with-most-water/problem.md)
+- [x] [Trapping Rain Water](02_Two_Pointers/trapping-rain-water/problem.md)
+
+_Some Notes on This Section:_
+I had some real trouble with the Trapping Rain Water problem. My first algorithm, which was faulty, initialized both pointers to the start of the array. I thought: I should find the left and right edges of the buckets and calculate the internal volume. This required that I calculate sub-array sums & create more variables. Also, the logic was overly complicated.
+
+I questioned whether I should solve the problem vertically or horizontally. Vertically would mean calculating the area of a single _unit-wide_ slice of the array. Horizontally would mean calculating the area of a _unit-tall_ slice of the array. My first algorithm settled somewhere in-between: calculate total sum of the largest bucket and subtract the internal elevations.
+
+I tried to start by defining a bucket- I concluded that a bucket is defined by two conditions: for all elevations ele in range (left, right), ele < elevation @ left && ele < elevation @ right. This is a sound definition of a bucket. What I didn't consider: when I advance ptrs iff the opposite ptr has seen a height >= the ptr's maximum observed height, I guaruntee that any drop in elevation is contained within some bucket.
+
+With this approach in mind, it's best to redefine a bucket: a bucket occurs when there exists some elevation ele in range (left, right) s.t. ele < elevation @ left && ele < elevation @ right. When we prioritize making the bucket edges taller as quickly as possible, we catch all these existing elevations.
+
+When I changed my bucket definition from a more restrictive "for all" predicate to the looser "there exists" predicate, the problem simplified significantly. I'll be keeping this in mind going forward.
+
+It's strange and initially counterintuitive to come at this problem from the left and right sides, but redefining a bucket brings some clarity to the problem.
+
+Another note: every two-pointer problem starts with left & right ptrs at the left and right sides of the iterable object. I'll seek solutions of this form going forward.
 
 ## Sliding Window (6)
 
-- [ ] [Best Time to Buy And Sell Stock](03_Sliding_Window/best-time-to-buy-and-sell-stock/problem.md)
+- [x] [Best Time to Buy And Sell Stock](03_Sliding_Window/best-time-to-buy-and-sell-stock/problem.md)
 - [ ] [Longest Substring Without Repeating Characters](03_Sliding_Window/longest-substring-without-repeating-characters/problem.md)
 - [ ] [Longest Repeating Character Replacement](03_Sliding_Window/longest-repeating-character-replacement/problem.md)
 - [ ] [Permutation In String](03_Sliding_Window/permutation-in-string/problem.md)

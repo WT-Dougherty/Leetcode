@@ -9,10 +9,57 @@ import time
 import random
 from typing import List
 
+import math
+
 
 class Solution:
     def trap(self, height: List[int]) -> int:
-        pass
+        """Algorithm v2:
+
+        left, right = 0, 1
+        area = 0
+        while left < len(height) - 1:
+            # search for an end to the current left edge
+            while height[right] < height[left]:
+                right += 1
+
+                # condition: we didn't find a right edge
+                if right == len(height):
+                    right = left + 1
+                    break
+
+            # if we found a bucket, add to area; else, continue search for buckets
+            if right != left + 1:
+                area += (right - left - 1) * min(height[left], height[right]) - sum(
+                    height[left + 1 : right]
+                )
+                left = right
+                right += 1
+            else:
+                left += 1
+                right = left + 1
+
+        return area
+
+        Problem: buckets with the limiting edge on the right are not detected.
+        I need a way to keep track of the max & corresponding index on the right,
+        and check that it creates a bucket w/ the left edge
+        """
+
+        left, right = 0, len(height) - 1
+        leftMax, rightMax = height[left], height[right]
+        area = 0
+        while left < right:
+            if leftMax < rightMax:
+                left += 1
+                leftMax = max(leftMax, height[left])
+                area += leftMax - height[left]
+            else:
+                right -= 1
+                rightMax = max(rightMax, height[right])
+                area += rightMax - height[right]
+
+        return area
 
 
 def test_accuracy():
@@ -64,10 +111,10 @@ def test_accuracy():
     result9 = solution.trap(height9)
     assert result9 == 7, f"Failed for {height9}, expected 7, got {result9}"
 
-    # Test Case 10: Edge case with zeros
-    height10 = [0, 2, 0]
+    # Test Case 10: Smaller right edge
+    height10 = [4, 2, 3]
     result10 = solution.trap(height10)
-    assert result10 == 0, f"Failed for {height10}, expected 0, got {result10}"
+    assert result10 == 1, f"Failed for {height10}, expected 1, got {result10}"
 
     print("✅ All accuracy tests passed!")
 

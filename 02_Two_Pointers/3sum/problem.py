@@ -14,7 +14,46 @@ from typing import List
 
 class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
-        pass
+        nums.sort()  # sort the array O(n log n)
+        ra = []
+        for i in range(len(nums)):
+            # avoid duplicates
+            if i > 0 and nums[i] == nums[i - 1]:
+                continue
+
+            left = i + 1
+            right = len(nums) - 1
+
+            while left < right:
+                s = nums[i] + nums[left] + nums[right]
+
+                # case1: we have a valid three sum
+                if s == 0:
+                    ra.append([nums[i], nums[left], nums[right]])
+                    left += 1
+                    # avoid duplicates again
+                    while left < right and nums[left] == nums[left - 1]:
+                        left += 1
+
+                # case2: increment left
+                elif s < 0:
+                    left += 1
+
+                # case3: decrement right
+                else:
+                    right -= 1
+        return ra
+
+    def BruteForce(self, nums: List[int]) -> List[List[int]]:
+        ra = []
+        for i in range(len(nums)):
+            for j in range(i + 1, len(nums)):
+                for k in range(j + 1, len(nums)):
+                    l = [nums[i], nums[j], nums[k]]
+                    l.sort()
+                    if nums[i] + nums[j] + nums[k] == 0 and l not in ra:
+                        ra.append(l)
+        return ra
 
 
 def test_accuracy():

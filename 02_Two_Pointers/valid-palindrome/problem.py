@@ -1,7 +1,7 @@
 """
 Valid Palindrome - LeetCode Problem 125
 
-A phrase is a palindrome if, after converting all uppercase letters into lowercase letters 
+A phrase is a palindrome if, after converting all uppercase letters into lowercase letters
 and removing all non-alphanumeric characters, it reads the same forward and backward.
 
 Given a string s, return true if it is a palindrome, or false otherwise.
@@ -10,12 +10,20 @@ Given a string s, return true if it is a palindrome, or false otherwise.
 import time
 import random
 import string
-from typing import List
 
 
 class Solution:
     def isPalindrome(self, s: str) -> bool:
-        pass
+        # clean the string
+        s = "".join(c for c in s if c.isalnum()).lower()
+
+        l, r = 0, len(s) - 1
+        while l <= r:
+            if s[l] != s[r]:
+                return False
+            l += 1
+            r -= 1
+        return True
 
 
 def test_accuracy():
@@ -80,7 +88,7 @@ def test_time_complexity():
     for size in test_sizes:
         # Generate test data - create strings with mixed characters
         chars = string.ascii_letters + string.digits + "!@#$%^&*() "
-        s = ''.join(random.choices(chars, k=size))
+        s = "".join(random.choices(chars, k=size))
 
         # Test approach
         start_time = time.time()
@@ -95,30 +103,34 @@ def test_time_complexity():
         # Calculate ratios between consecutive time measurements
         ratios = []
         for i in range(1, len(times)):
-            ratio = times[i] / times[i-1]
+            ratio = times[i] / times[i - 1]
             ratios.append(ratio)
-        
+
         # Calculate expected ratios for O(n) complexity
         expected_ratios = []
         for i in range(1, len(test_sizes)):
-            expected_ratio = test_sizes[i] / test_sizes[i-1]
+            expected_ratio = test_sizes[i] / test_sizes[i - 1]
             expected_ratios.append(expected_ratio)
-        
+
         print(f"\nTime ratios: {[f'{r:.2f}x' for r in ratios]}")
         print(f"Expected ratios for O(n): {[f'{r:.2f}x' for r in expected_ratios]}")
-        
+
         # Check if ratios are within acceptable range (allowing some variance)
         tolerance = 0.5  # Allow 50% variance
         for i, (actual, expected) in enumerate(zip(ratios, expected_ratios)):
             min_expected = expected * (1 - tolerance)
             max_expected = expected * (1 + tolerance)
-            
+
             if not (actual <= max_expected):
                 print(f"\n❌ FAILED: Time complexity appears worse than O(n)")
-                print(f"   Size {test_sizes[i]} to {test_sizes[i+1]}: expected ~{expected:.2f}x, got {actual:.2f}x")
+                print(
+                    f"   Size {test_sizes[i]} to {test_sizes[i+1]}: expected ~{expected:.2f}x, got {actual:.2f}x"
+                )
                 print(f"   This suggests O(n log n) or worse complexity")
-                raise AssertionError(f"Time complexity test failed: expected O(n), but got worse complexity")
-        
+                raise AssertionError(
+                    f"Time complexity test failed: expected O(n), but got worse complexity"
+                )
+
         print(f"\n✅ PASSED: Time complexity appears to be O(n)")
         return True
     else:
@@ -168,7 +180,7 @@ def benchmark_solution():
 
     # Large dataset
     chars = string.ascii_letters + string.digits + "!@#$%^&*() "
-    s = ''.join(random.choices(chars, k=200000))
+    s = "".join(random.choices(chars, k=200000))
 
     start_time = time.time()
     result = solution.isPalindrome(s)

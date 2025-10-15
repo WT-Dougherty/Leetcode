@@ -17,7 +17,17 @@ from typing import List
 
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        pass
+        max_profit = 0
+        left, right = 0, 1
+        while right < len(prices):
+            max_profit = max(max_profit, prices[right] - prices[left])
+            if left == right:
+                right += 1
+            elif prices[left] > prices[right]:
+                left += 1
+            else:
+                right += 1
+        return max_profit
 
 
 def test_accuracy():
