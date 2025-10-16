@@ -15,7 +15,30 @@ from collections import deque
 
 class Solution:
     def maxSlidingWindow(self, nums: list[int], k: int) -> list[int]:
-        pass
+        ra = []
+        dq = deque()
+
+        # initialize
+        if len(nums) == 0 or len(nums) < k:
+            return []
+        dq.append(0)
+
+        for i in range(len(nums)):
+            # remove out of range indices
+            while len(dq) != 0 and i - dq[0] >= k:
+                dq.popleft()
+
+            # remove smaller elements from double ended queue
+            while len(dq) != 0 and nums[i] >= nums[dq[-1]]:
+                dq.pop()
+
+            # add the new index to double ended queue
+            dq.append(i)
+
+            if i >= k - 1:
+                ra.append(nums[dq[0]])
+
+        return ra
 
 
 def test_accuracy():

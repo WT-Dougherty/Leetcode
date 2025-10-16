@@ -14,7 +14,18 @@ import random
 
 class Solution:
     def search(self, nums: list[int], target: int) -> int:
-        pass
+        return self.Binary_Search(nums, target, 0, len(nums) - 1)
+
+    def Binary_Search(self, nums: list[int], target: int, left: int, right: int):
+        if left > right:
+            return -1
+        mid = (left + right) // 2
+        if nums[mid] == target:
+            return mid
+        elif nums[mid] > target:
+            return self.Binary_Search(nums, target, left, mid - 1)
+        else:
+            return self.Binary_Search(nums, target, mid + 1, right)
 
 
 def test_accuracy():

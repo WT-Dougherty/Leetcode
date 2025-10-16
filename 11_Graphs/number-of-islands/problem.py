@@ -7,11 +7,68 @@ return the number of islands.
 
 import time
 from typing import List
+from collections import deque
 
 
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
-        pass
+        count = 0
+        for row_i in range(len(grid)):
+            for col_i in range(len(grid[0])):
+                if grid[row_i][col_i] == "0":
+                    continue
+                self.DFS(grid, (row_i, col_i))
+                count += 1
+        return count
+
+    def BFS(self, grid: List[List[str]], coord: tuple):
+        q = deque()
+        q.appendleft(coord)
+        grid[coord[0]][coord[1]] = "0"
+        while True:
+            if len(q) == 0:
+                break
+
+            cur_node = q.pop()
+            neighbors = [
+                (cur_node[0] - 1, cur_node[1]),
+                (cur_node[0] + 1, cur_node[1]),
+                (cur_node[0], cur_node[1] - 1),
+                (cur_node[0], cur_node[1] + 1),
+            ]
+
+            for n in neighbors:
+                # check in range and equal to 1
+                if (
+                    n[0] < 0
+                    or n[0] >= len(grid)
+                    or n[1] < 0
+                    or n[1] >= len(grid[0])
+                    or grid[n[0]][n[1]] == "0"
+                ):
+                    continue
+                q.appendleft(n)
+                grid[n[0]][n[1]] = "0"
+
+    def DFS(self, grid: List[List[str]], coord: tuple):
+        grid[coord[0]][coord[1]] = "0"
+        neighbors = [
+            (coord[0] - 1, coord[1]),
+            (coord[0] + 1, coord[1]),
+            (coord[0], coord[1] - 1),
+            (coord[0], coord[1] + 1),
+        ]
+        for n in neighbors:
+            # check in range and equal to 1
+            if (
+                n[0] < 0
+                or n[0] >= len(grid)
+                or n[1] < 0
+                or n[1] >= len(grid[0])
+                or grid[n[0]][n[1]] == "0"
+            ):
+                continue
+            self.DFS(grid, n)
 
 
 def test_accuracy():

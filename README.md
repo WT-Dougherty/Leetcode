@@ -48,8 +48,8 @@ Another note: every two-pointer problem starts with left & right ptrs at the lef
 - [x] [Longest Substring Without Repeating Characters](03_Sliding_Window/longest-substring-without-repeating-characters/problem.md)
 - [x] [Longest Repeating Character Replacement](03_Sliding_Window/longest-repeating-character-replacement/problem.md)
 - [ ] [Permutation In String](03_Sliding_Window/permutation-in-string/problem.md)
-- [ ] [Minimum Window Substring](03_Sliding_Window/minimum-window-substring/problem.md)
-- [ ] [Sliding Window Maximum](03_Sliding_Window/sliding-window-maximum/problem.md)
+- [x] [Minimum Window Substring](03_Sliding_Window/minimum-window-substring/problem.md)
+- [x] [Sliding Window Maximum](03_Sliding_Window/sliding-window-maximum/problem.md)
 
 ## Stack (7)
 
@@ -63,7 +63,7 @@ Another note: every two-pointer problem starts with left & right ptrs at the lef
 
 ## Binary Search (7)
 
-- [ ] [Binary Search](05_Binary_Search/binary-search/problem.md)
+- [x] [Binary Search](05_Binary_Search/binary-search/problem.md)
 - [ ] [Search a 2D Matrix](05_Binary_Search/search-a-2d-matrix/problem.md)
 - [ ] [Koko Eating Bananas](05_Binary_Search/koko-eating-bananas/problem.md)
 - [ ] [Search In Rotated Sorted Array](05_Binary_Search/search-in-rotated-sorted-array/problem.md)
@@ -78,7 +78,7 @@ Another note: every two-pointer problem starts with left & right ptrs at the lef
 - [ ] [Reorder List](06_Linked_List/reorder-list/problem.md)
 - [ ] [Remove Nth Node From End of List](06_Linked_List/remove-nth-node-from-end-of-list/problem.md)
 - [ ] [Copy List With Random Pointer](06_Linked_List/copy-list-with-random-pointer/problem.md)
-- [ ] [Add Two Numbers](06_Linked_List/add-two-numbers/problem.md)
+- [x] [Add Two Numbers](06_Linked_List/add-two-numbers/problem.md)
 - [ ] [Linked List Cycle](06_Linked_List/linked-list-cycle/problem.md)
 - [ ] [Find The Duplicate Number](06_Linked_List/find-the-duplicate-number/problem.md)
 - [ ] [LRU Cache](06_Linked_List/lru-cache/problem.md)
@@ -133,7 +133,7 @@ Another note: every two-pointer problem starts with left & right ptrs at the lef
 
 ## Graphs (13)
 
-- [ ] [Number of Islands](11_Graphs/number-of-islands/problem.md)
+- [x] [Number of Islands](11_Graphs/number-of-islands/problem.md)
 - [ ] [Clone Graph](11_Graphs/clone-graph/problem.md)
 - [ ] [Max Area of Island](11_Graphs/max-area-of-island/problem.md)
 - [ ] [Pacific Atlantic Water Flow](11_Graphs/pacific-atlantic-water-flow/problem.md)

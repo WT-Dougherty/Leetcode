@@ -1,8 +1,8 @@
 """
 Minimum Window Substring - LeetCode Problem 76
 
-Given two strings s and t of lengths m and n respectively, return the minimum window substring 
-of s such that every character in t (including duplicates) is included in the window. 
+Given two strings s and t of lengths m and n respectively, return the minimum window substring
+of s such that every character in t (including duplicates) is included in the window.
 If there is no such window, return the empty string "".
 
 The testcases will be generated such that the answer is unique.
@@ -12,11 +12,42 @@ A substring is a contiguous sequence of characters within the string.
 import time
 import random
 import string
+from collections import Counter
 
 
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
-        pass
+        # first, generate the map of t (reference map)
+        t_map = Counter()
+        for c in t:
+            t_map[c] += 1
+
+        # now, set up the sliding window and iterate
+        s_map = Counter()
+        ans = ""
+        left = 0
+        for right in range(len(s) + 1):
+
+            # condition: we have a valid window (adjust left)
+            while t_map <= s_map:
+                # condition: this is the first valid window
+                if len(ans) == 0:
+                    ans = s[left:right]
+
+                # adjust the answer
+                if len(ans) > right - left:
+                    ans = s[left:right]
+
+                # adjust the left pointer
+                if s[left] in t_map:
+                    s_map[s[left]] -= 1
+                left += 1
+
+            # condition: we have an invalid window
+            if right < len(s) and s[right] in t_map:
+                s_map[s[right]] += 1
+            continue
+        return ans
 
 
 def test_accuracy():
@@ -26,12 +57,16 @@ def test_accuracy():
     # Test Case 1: Basic case
     s1, t1 = "ADOBECODEBANC", "ABC"
     result1 = solution.minWindow(s1, t1)
-    assert result1 == "BANC", f"Failed for s='{s1}', t='{t1}', expected 'BANC', got '{result1}'"
+    assert (
+        result1 == "BANC"
+    ), f"Failed for s='{s1}', t='{t1}', expected 'BANC', got '{result1}'"
 
     # Test Case 2: Single character
     s2, t2 = "a", "a"
     result2 = solution.minWindow(s2, t2)
-    assert result2 == "a", f"Failed for s='{s2}', t='{t2}', expected 'a', got '{result2}'"
+    assert (
+        result2 == "a"
+    ), f"Failed for s='{s2}', t='{t2}', expected 'a', got '{result2}'"
 
     # Test Case 3: No valid window
     s3, t3 = "a", "aa"
@@ -41,12 +76,16 @@ def test_accuracy():
     # Test Case 4: Same strings
     s4, t4 = "abc", "abc"
     result4 = solution.minWindow(s4, t4)
-    assert result4 == "abc", f"Failed for s='{s4}', t='{t4}', expected 'abc', got '{result4}'"
+    assert (
+        result4 == "abc"
+    ), f"Failed for s='{s4}', t='{t4}', expected 'abc', got '{result4}'"
 
     # Test Case 5: Multiple occurrences
     s5, t5 = "ab", "b"
     result5 = solution.minWindow(s5, t5)
-    assert result5 == "b", f"Failed for s='{s5}', t='{t5}', expected 'b', got '{result5}'"
+    assert (
+        result5 == "b"
+    ), f"Failed for s='{s5}', t='{t5}', expected 'b', got '{result5}'"
 
     # Test Case 6: Complex case
     s6, t6 = "a", "b"
@@ -56,12 +95,16 @@ def test_accuracy():
     # Test Case 7: Case sensitive
     s7, t7 = "aA", "aA"
     result7 = solution.minWindow(s7, t7)
-    assert result7 == "aA", f"Failed for s='{s7}', t='{t7}', expected 'aA', got '{result7}'"
+    assert (
+        result7 == "aA"
+    ), f"Failed for s='{s7}', t='{t7}', expected 'aA', got '{result7}'"
 
     # Test Case 8: Duplicate characters in t
     s8, t8 = "bba", "ab"
     result8 = solution.minWindow(s8, t8)
-    assert result8 == "ba", f"Failed for s='{s8}', t='{t8}', expected 'ba', got '{result8}'"
+    assert (
+        result8 == "ba"
+    ), f"Failed for s='{s8}', t='{t8}', expected 'ba', got '{result8}'"
 
     # Test Case 9: Empty result
     s9, t9 = "abc", "xyz"
@@ -71,7 +114,9 @@ def test_accuracy():
     # Test Case 10: Edge case
     s10, t10 = "ab", "a"
     result10 = solution.minWindow(s10, t10)
-    assert result10 == "a", f"Failed for s='{s10}', t='{t10}', expected 'a', got '{result10}'"
+    assert (
+        result10 == "a"
+    ), f"Failed for s='{s10}', t='{t10}', expected 'a', got '{result10}'"
 
     print("✅ All accuracy tests passed!")
 
