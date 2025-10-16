@@ -45,8 +45,8 @@ Another note: every two-pointer problem starts with left & right ptrs at the lef
 ## Sliding Window (6)
 
 - [x] [Best Time to Buy And Sell Stock](03_Sliding_Window/best-time-to-buy-and-sell-stock/problem.md)
-- [ ] [Longest Substring Without Repeating Characters](03_Sliding_Window/longest-substring-without-repeating-characters/problem.md)
-- [ ] [Longest Repeating Character Replacement](03_Sliding_Window/longest-repeating-character-replacement/problem.md)
+- [x] [Longest Substring Without Repeating Characters](03_Sliding_Window/longest-substring-without-repeating-characters/problem.md)
+- [x] [Longest Repeating Character Replacement](03_Sliding_Window/longest-repeating-character-replacement/problem.md)
 - [ ] [Permutation In String](03_Sliding_Window/permutation-in-string/problem.md)
 - [ ] [Minimum Window Substring](03_Sliding_Window/minimum-window-substring/problem.md)
 - [ ] [Sliding Window Maximum](03_Sliding_Window/sliding-window-maximum/problem.md)

@@ -10,11 +10,43 @@ performing the above operations.
 
 import time
 import random
+from collections import Counter
 
 
 class Solution:
     def characterReplacement(self, s: str, k: int) -> int:
-        pass
+        left, right = 0, 0
+        max_freq = 0
+        cnt = Counter()
+
+        while right < len(s):
+            cnt[s[right]] += 1
+            max_freq = max(max_freq, cnt[s[right]])
+
+            # condition to move left pointer
+            while (right - left + 1) - max_freq > k:
+                cnt[s[left]] -= 1
+                left += 1
+            right += 1
+
+        return len(s) - left
+
+    # this brute-force alg (my first attempt) is accurate, but O(n^2) slow.
+    def BruteForce(self, s: str, k: int) -> int:
+        right, max_len = 0, 0
+        for i in range(len(s)):
+            changes = 0
+            right = i
+            while right < len(s):
+                if s[i] != s[right]:
+                    changes += 1
+                    if changes > k:
+                        break
+                right += 1
+
+            right -= 1
+            max_len = max(max_len, right - i + 1)
+        return max_len
 
 
 def test_accuracy():
