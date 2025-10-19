@@ -65,7 +65,7 @@ Another note: every two-pointer problem starts with left & right ptrs at the lef
 
 - [x] [Binary Search](05_Binary_Search/binary-search/problem.md)
 - [ ] [Search a 2D Matrix](05_Binary_Search/search-a-2d-matrix/problem.md)
-- [ ] [Koko Eating Bananas](05_Binary_Search/koko-eating-bananas/problem.md)
+- [x] [Koko Eating Bananas](05_Binary_Search/koko-eating-bananas/problem.md)
 - [ ] [Search In Rotated Sorted Array](05_Binary_Search/search-in-rotated-sorted-array/problem.md)
 - [ ] [Find Minimum In Rotated Sorted Array](05_Binary_Search/find-minimum-in-rotated-sorted-array/problem.md)
 - [ ] [Time Based Key Value Store](05_Binary_Search/time-based-key-value-store/problem.md)
@@ -217,8 +217,8 @@ Another note: every two-pointer problem starts with left & right ptrs at the lef
 
 ## Bit Manipulation (9)
 
-- [ ] [Number of 1 Bits](18_Bit_Manipulation/number-of-1-bits/problem.md)
-- [ ] [Counting Bits](18_Bit_Manipulation/counting-bits/problem.md)
+- [x] [Number of 1 Bits](18_Bit_Manipulation/number-of-1-bits/problem.md)
+- [x] [Counting Bits](18_Bit_Manipulation/counting-bits/problem.md)
 - [ ] [Reverse Bits](18_Bit_Manipulation/reverse-bits/problem.md)
 - [ ] [Missing Number](18_Bit_Manipulation/missing-number/problem.md)
 - [ ] [Sum of Two Integers](18_Bit_Manipulation/sum-of-two-integers/problem.md)

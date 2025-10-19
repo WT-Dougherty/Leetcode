@@ -10,7 +10,15 @@ import time
 
 class Solution:
     def countBits(self, n):
-        pass
+        ans = []
+        for i in range(n + 1):
+            count = 0
+            b = bin(i).strip("0b")
+            for l in b:
+                if l == "1":
+                    count += 1
+            ans.append(count)
+        return ans
 
 
 def test_accuracy():

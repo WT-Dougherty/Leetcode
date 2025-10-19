@@ -16,12 +16,27 @@ Return the minimum integer k such that she can eat all the bananas within h hour
 
 import time
 import random
+from math import ceil
 from typing import List
 
 
 class Solution:
     def minEatingSpeed(self, piles: List[int], h: int) -> int:
-        pass
+        def AcceptableSpeed(k):
+            hours = 0
+            for pile in piles:
+                hours += ceil(pile / k)
+            return hours <= h
+
+        large_pile = max(piles)
+        l, r = 1, large_pile
+        while l < r:
+            mid = (l + r) // 2
+            if AcceptableSpeed(mid):
+                r = mid
+            else:
+                l = mid + 1
+        return r
 
 
 def test_accuracy():
@@ -85,7 +100,7 @@ def test_accuracy():
     piles10, h10 = [1, 2, 3, 4, 5], 5
     result10 = solution.minEatingSpeed(piles10, h10)
     assert (
-        result10 == 3
+        result10 == 5
     ), f"Failed for piles={piles10}, h={h10}, expected 3, got {result10}"
 
     print("✅ All accuracy tests passed!")
