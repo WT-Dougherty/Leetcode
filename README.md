@@ -135,10 +135,10 @@ Another note: every two-pointer problem starts with left & right ptrs at the lef
 
 - [x] [Number of Islands](11_Graphs/number-of-islands/problem.md)
 - [ ] [Clone Graph](11_Graphs/clone-graph/problem.md)
-- [ ] [Max Area of Island](11_Graphs/max-area-of-island/problem.md)
+- [x] [Max Area of Island](11_Graphs/max-area-of-island/problem.md)
 - [ ] [Pacific Atlantic Water Flow](11_Graphs/pacific-atlantic-water-flow/problem.md)
 - [ ] [Surrounded Regions](11_Graphs/surrounded-regions/problem.md)
-- [ ] [Rotting Oranges](11_Graphs/rotting-oranges/problem.md)
+- [x] [Rotting Oranges](11_Graphs/rotting-oranges/problem.md)
 - [ ] [Walls And Gates](11_Graphs/walls-and-gates/problem.md)
 - [ ] [Course Schedule](11_Graphs/course-schedule/problem.md)
 - [ ] [Course Schedule II](11_Graphs/course-schedule-ii/problem.md)

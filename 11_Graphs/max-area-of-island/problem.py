@@ -8,11 +8,77 @@ grid are surrounded by water.
 
 import time
 from typing import List
+from collections import deque
 
 
 class Solution:
     def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
-        pass
+        max_area = 0
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
+                if grid[i][j] == 0:
+                    continue
+                else:
+                    max_area = max(self.DFS(grid, (i, j), 0), max_area)
+        return max_area
+
+    def BFS(self, grid: List[List[str]], coord: tuple) -> int:
+        q = deque()
+        q.appendleft(coord)
+        grid[coord[0]][coord[1]] = 0
+        count = 1
+        while True:
+            if len(q) == 0:
+                break
+
+            cur_node = q.pop()
+            neighbors = [
+                (cur_node[0] - 1, cur_node[1]),
+                (cur_node[0] + 1, cur_node[1]),
+                (cur_node[0], cur_node[1] - 1),
+                (cur_node[0], cur_node[1] + 1),
+            ]
+
+            for n in neighbors:
+                # check in range and equal to 1
+                if (
+                    n[0] < 0
+                    or n[0] >= len(grid)
+                    or n[1] < 0
+                    or n[1] >= len(grid[0])
+                    or grid[n[0]][n[1]] == 0
+                ):
+                    continue
+                q.appendleft(n)
+                grid[n[0]][n[1]] = 0
+                count += 1
+        return count
+
+    def DFS(self, grid: List[List[str]], coord: tuple, count: int) -> int:
+        def ValidNeighbor(n: tuple) -> bool:
+            if (
+                n[0] < 0
+                or n[0] >= len(grid)
+                or n[1] < 0
+                or n[1] >= len(grid[0])
+                or grid[n[0]][n[1]] == 0
+            ):
+                return False
+            return True
+
+        grid[coord[0]][coord[1]] = 0
+        count += 1
+
+        neighbors = [
+            (coord[0] - 1, coord[1]),
+            (coord[0] + 1, coord[1]),
+            (coord[0], coord[1] - 1),
+            (coord[0], coord[1] + 1),
+        ]
+        for n in neighbors:
+            if ValidNeighbor(n):
+                count = self.DFS(grid, n, count)
+        return count
 
 
 def test_accuracy():

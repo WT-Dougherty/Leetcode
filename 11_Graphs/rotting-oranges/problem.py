@@ -8,12 +8,65 @@ You are given an m x n grid where each cell can have one of three values:
 """
 
 import time
+from collections import deque
 from typing import List
 
 
 class Solution:
     def orangesRotting(self, grid: List[List[int]]) -> int:
-        pass
+        time_array = [
+            [0 if grid[row][col] == 0 else -1 for col in range(len(grid[0]))]
+            for row in range(len(grid))
+        ]
+        for row in range(len(grid)):
+            for col in range(len(grid[0])):
+                if grid[row][col] == 2:
+                    self.BFS(grid, time_array, (row, col))
+
+        min_time = -1
+        for row in range(len(grid)):
+            for col in range(len(grid[0])):
+                if time_array[row][col] == -1:
+                    return -1
+                min_time = max(min_time, time_array[row][col])
+        return min_time
+
+    def BFS(
+        self, grid: List[List[int]], time_array: List[List[int]], coord: tuple
+    ) -> None:
+        def Advance(c: tuple, proj_time: int) -> bool:
+            if (
+                c[0] >= 0
+                and c[0] < len(grid)
+                and c[1] >= 0
+                and c[1] < len(grid[0])
+                and grid[c[0]][c[1]] == 1
+                and (time_array[c[0]][c[1]] == -1 or time_array[c[0]][c[1]] > proj_time)
+            ):
+                return True
+            else:
+                return False
+
+        q = deque()
+        q.appendleft((coord, 0))
+        while True:
+            if len(q) == 0:
+                break
+
+            pckg = q.pop()
+            cur_coord = pckg[0]
+            cur_time = pckg[1]
+
+            time_array[cur_coord[0]][cur_coord[1]] = cur_time
+            neighbors = [
+                (cur_coord[0] - 1, cur_coord[1]),
+                (cur_coord[0] + 1, cur_coord[1]),
+                (cur_coord[0], cur_coord[1] - 1),
+                (cur_coord[0], cur_coord[1] + 1),
+            ]
+            for n in neighbors:
+                if Advance(n, cur_time + 1):
+                    q.appendleft((n, cur_time + 1))
 
 
 def test_accuracy():
