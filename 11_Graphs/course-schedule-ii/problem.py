@@ -7,12 +7,48 @@ must take course bi first if you want to take course ai.
 """
 
 import time
+from collections import defaultdict
 from typing import List
 
 
 class Solution:
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
-        pass
+        ans = []
+        # create the directed graph in O(V + E)
+        g = defaultdict(list)
+        for course, prereq in prerequisites:
+            g[course].append(prereq)
+
+        UNVISITED, VISITING, VISITED = 0, 1, 2
+        states = [UNVISITED] * numCourses
+
+        def DFS(node: int) -> bool:
+            state = states[node]
+
+            # if there is an edge
+            if state == VISITING:
+                return False
+
+            # skip if already visited
+            if state == VISITED:
+                return True
+
+            states[node] = VISITING
+
+            # visit neighbors
+            for n in g[node]:
+                if not DFS(n):
+                    return False
+
+            # for upwards propegation through stack
+            states[node] = VISITED
+            ans.append(node)
+            return True
+
+        for node in range(numCourses):
+            if not DFS(node):
+                return []
+        return ans
 
 
 def test_accuracy():

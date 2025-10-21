@@ -7,12 +7,56 @@ the island's right and bottom edges.
 """
 
 import time
+from collections import deque
 from typing import List
 
 
 class Solution:
     def pacificAtlantic(self, heights: List[List[int]]) -> List[List[int]]:
-        pass
+        def BFS(seen: set, q: deque):
+            while q:
+                cur = q.pop()
+                neighbors = [
+                    (cur[0] - 1, cur[1]),
+                    (cur[0] + 1, cur[1]),
+                    (cur[0], cur[1] - 1),
+                    (cur[0], cur[1] + 1),
+                ]
+                for n in neighbors:
+                    if (
+                        n not in seen
+                        and 0 <= n[0] < len(heights)
+                        and 0 <= n[1] < len(heights[0])
+                        and heights[n[0]][n[1]] >= heights[cur[0]][cur[1]]
+                    ):
+                        q.appendleft(n)
+                        seen.add(n)
+
+        pacific_coords = set()
+        atlantic_coords = set()
+        q = deque()
+
+        # find valid pacific coords
+        for row in range(len(heights)):
+            q.appendleft((row, 0))
+            pacific_coords.add((row, 0))
+        for col in range(1, len(heights[0])):
+            q.appendleft((0, col))
+            pacific_coords.add((0, col))
+        BFS(pacific_coords, q)
+
+        # find valid atlantic coords
+        for row in range(len(heights)):
+            q.appendleft((row, len(heights[0]) - 1))
+            atlantic_coords.add((row, len(heights[0]) - 1))
+        for col in range(len(heights[0]) - 1):
+            q.appendleft((len(heights) - 1, col))
+            atlantic_coords.add((len(heights) - 1, col))
+        BFS(atlantic_coords, q)
+
+        return list(
+            list(coord) for coord in pacific_coords.intersection(atlantic_coords)
+        )
 
 
 def test_accuracy():
@@ -75,13 +119,9 @@ def test_accuracy():
     ), f"Failed for single column, expected {expected5_sorted}, got {result5_sorted}"
 
     # Test Case 6: Decreasing heights
-    heights6 = [
-        [5, 4, 3],
-        [4, 3, 2],
-        [3, 2, 1],
-    ]
+    heights6 = [[1, 1], [1, 1], [1, 1]]
     result6 = solution.pacificAtlantic(heights6)
-    expected6 = [[0, 0], [0, 1], [0, 2], [1, 0], [1, 1], [1, 2], [2, 0], [2, 1], [2, 2]]
+    expected6 = [[0, 1], [2, 1], [0, 0], [1, 1], [2, 0], [1, 0]]
     result6_sorted = sorted(result6)
     expected6_sorted = sorted(expected6)
     assert (
@@ -95,7 +135,7 @@ def test_accuracy():
         [3, 4, 5],
     ]
     result7 = solution.pacificAtlantic(heights7)
-    expected7 = [[0, 0], [0, 1], [0, 2], [1, 0], [1, 1], [1, 2], [2, 0], [2, 1], [2, 2]]
+    expected7 = [[0, 2], [1, 2], [2, 0], [2, 1], [2, 2]]
     result7_sorted = sorted(result7)
     expected7_sorted = sorted(expected7)
     assert (
