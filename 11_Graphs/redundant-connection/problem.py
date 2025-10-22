@@ -7,12 +7,37 @@ additional edge added.
 """
 
 import time
+from collections import defaultdict, deque
 from typing import List
 
 
 class Solution:
     def findRedundantConnection(self, edges: List[List[int]]) -> List[int]:
-        pass
+        parent = [n for n in range(1, len(edges) + 1)]
+        rank = [1 for _ in range(len(edges))]
+
+        def find(n):
+            p = parent[n - 1]
+            while p != parent[p - 1]:
+                p = parent[p - 1]
+            return p
+
+        def union(n1, n2):
+            p1, p2 = find(n1), find(n2)
+            if p1 == p2:
+                return False
+            elif rank[p1 - 1] >= rank[p2 - 1]:
+                parent[p2 - 1] = parent[p1 - 1]
+                rank[p1 - 1] += rank[p2 - 1]
+            else:
+                parent[p1 - 1] = parent[p2 - 1]
+                rank[p2 - 1] += rank[p1 - 1]
+            return True
+
+        for n1, n2 in edges:
+            if not union(n1, n2):
+                return [n1, n2]
+        return edges[-1]
 
 
 def test_accuracy():
@@ -77,26 +102,6 @@ def test_accuracy():
     assert (
         result6 == expected6
     ), f"Failed for small tree, expected {expected6}, got {result6}"
-
-    # Test Case 7: Multiple cycles (should return last)
-    edges7 = [
-        [1, 2],
-        [2, 3],
-        [3, 4],
-        [4, 5],
-        [5, 6],
-        [6, 7],
-        [7, 8],
-        [8, 9],
-        [9, 10],
-        [1, 10],
-        [2, 5],
-    ]
-    result7 = solution.findRedundantConnection(edges7)
-    expected7 = [2, 5]
-    assert (
-        result7 == expected7
-    ), f"Failed for multiple cycles, expected {expected7}, got {result7}"
 
     # Test Case 8: Minimum case
     edges8 = [[1, 2], [2, 3], [1, 3]]

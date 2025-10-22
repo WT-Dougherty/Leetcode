@@ -28,19 +28,9 @@ Hash maps provide constant time element lookup; you can check that you have come
 - [x] [Trapping Rain Water](02_Two_Pointers/trapping-rain-water/problem.md)
 
 _Some Notes on This Section:_
-I had some real trouble with the Trapping Rain Water problem. My first algorithm, which was faulty, initialized both pointers to the start of the array. I thought: I should find the left and right edges of the buckets and calculate the internal volume. This required that I calculate sub-array sums & create more variables. Also, the logic was overly complicated.
+Two pointer problems typically start with pointers on opposite edges of the iterable object. You typically initialize both of the pointers to the start of the iterable object when you're doing a sliding window problem.
 
-I questioned whether I should solve the problem vertically or horizontally. Vertically would mean calculating the area of a single _unit-wide_ slice of the array. Horizontally would mean calculating the area of a _unit-tall_ slice of the array. My first algorithm settled somewhere in-between: calculate total sum of the largest bucket and subtract the internal elevations.
-
-I tried to start by defining a bucket- I concluded that a bucket is defined by two conditions: for all elevations ele in range (left, right), ele < elevation @ left && ele < elevation @ right. This is a sound definition of a bucket. What I didn't consider: when I advance ptrs iff the opposite ptr has seen a height >= the ptr's maximum observed height, I guaruntee that any drop in elevation is contained within some bucket.
-
-With this approach in mind, it's best to redefine a bucket: a bucket occurs when there exists some elevation ele in range (left, right) s.t. ele < elevation @ left && ele < elevation @ right. When we prioritize making the bucket edges taller as quickly as possible, we catch all these existing elevations.
-
-When I changed my bucket definition from a more restrictive "for all" predicate to the looser "there exists" predicate, the problem simplified significantly. I'll be keeping this in mind going forward.
-
-It's strange and initially counterintuitive to come at this problem from the left and right sides, but redefining a bucket brings some clarity to the problem.
-
-Another note: every two-pointer problem starts with left & right ptrs at the left and right sides of the iterable object. I'll seek solutions of this form going forward.
+With this in mind, it's always best to start by trying to define your subproblem as some vertical slice of the interable object, or by the edges defined by the pointers. The "Trapping Rain Water" problem really tested my problem solving ability. Only when I clearly defined a bucket as some elevation < both edges did the solution start to formulate.
 
 ## Sliding Window (6)
 
@@ -137,15 +127,20 @@ Another note: every two-pointer problem starts with left & right ptrs at the lef
 - [x] [Clone Graph](11_Graphs/clone-graph/problem.md)
 - [x] [Max Area of Island](11_Graphs/max-area-of-island/problem.md)
 - [x] [Pacific Atlantic Water Flow](11_Graphs/pacific-atlantic-water-flow/problem.md)
-- [ ] [Surrounded Regions](11_Graphs/surrounded-regions/problem.md)
+- [x] [Surrounded Regions](11_Graphs/surrounded-regions/problem.md)
 - [x] [Rotting Oranges](11_Graphs/rotting-oranges/problem.md)
-- [ ] [Walls And Gates](11_Graphs/walls-and-gates/problem.md)
+- [x] [Walls And Gates](11_Graphs/walls-and-gates/problem.md)
 - [x] [Course Schedule](11_Graphs/course-schedule/problem.md)
 - [x] [Course Schedule II](11_Graphs/course-schedule-ii/problem.md)
-- [ ] [Redundant Connection](11_Graphs/redundant-connection/problem.md)
+- [x] [Redundant Connection](11_Graphs/redundant-connection/problem.md)
 - [x] [Number of Connected Components In An Undirected Graph](11_Graphs/number-of-connected-components-in-an-undirected-graph/problem.md)
 - [x] [Graph Valid Tree](11_Graphs/graph-valid-tree/problem.md)
 - [ ] [Word Ladder](11_Graphs/word-ladder/problem.md)
+
+_Some Notes on This Section:_
+Always opt for DFS when you have a choice in traversal problems. You can use the recursion stack to order your traversal, as opposed to having to maintain some queue for BFS. If you're given a set of (bi)directional relations (edges) between objects, you can probably solve the problem efficiently using graph traversal.
+
+the defaultdict type from the collections library is helpful when creating adjacency lists. Pass list type to the constructor to specify adjacency list.
 
 ## Advanced Graphs (6)
 

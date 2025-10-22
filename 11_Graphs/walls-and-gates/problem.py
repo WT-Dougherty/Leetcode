@@ -8,12 +8,47 @@ You are given an m x n grid rooms initialized with these three possible values:
 """
 
 import time
+from collections import deque
 from typing import List
 
 
 class Solution:
     def wallsAndGates(self, rooms: List[List[int]]) -> None:
-        pass
+        WALL, GATE = -1, 0
+
+        def BFS(coord: tuple) -> None:
+            q = deque()
+            seen = set()
+
+            q.appendleft((0, coord))
+            seen.add(coord)
+
+            while q:
+                d, cur = q.pop()
+                rooms[cur[0]][cur[1]] = min(rooms[cur[0]][cur[1]], d)
+
+                neighbors = [
+                    (cur[0] - 1, cur[1]),
+                    (cur[0] + 1, cur[1]),
+                    (cur[0], cur[1] - 1),
+                    (cur[0], cur[1] + 1),
+                ]
+                for nei in neighbors:
+                    if 0 <= nei[0] < len(rooms) and 0 <= nei[1] < len(rooms[0]):
+                        if (
+                            nei in seen
+                            or rooms[nei[0]][nei[1]] == WALL
+                            or rooms[nei[0]][nei[1]] == GATE
+                        ):
+                            continue
+                        else:
+                            q.appendleft((d + 1, nei))
+                            seen.add(nei)
+
+        for row in range(len(rooms)):
+            for col in range(len(rooms[0])):
+                if rooms[row][col] == GATE:
+                    BFS((row, col))
 
 
 def test_accuracy():
@@ -40,7 +75,7 @@ def test_accuracy():
 
     # Test Case 2: Single gate
     rooms2 = [[2147483647, -1, 0, 2147483647]]
-    expected2 = [[3, -1, 0, 1]]
+    expected2 = [[2147483647, -1, 0, 1]]
     solution.wallsAndGates(rooms2)
     assert (
         rooms2 == expected2
@@ -89,7 +124,7 @@ def test_accuracy():
         [2147483647, 0, 2147483647, 2147483647, 0, 2147483647, -1, 2147483647],
     ]
     expected7 = [
-        [1, 0, 1, 2, 0, 1, -1, 2147483647],
+        [1, 0, 1, 1, 0, 1, -1, 2147483647],
     ]
     solution.wallsAndGates(rooms7)
     assert (

@@ -6,12 +6,67 @@ Given an m x n matrix board containing 'X' and 'O', capture all regions that are
 """
 
 import time
+from collections import deque
 from typing import List
 
 
 class Solution:
     def solve(self, board: List[List[str]]) -> None:
-        pass
+        seen = set()
+        DEAD, BORDER, UNVISITED = 0, 1, 2
+        states: List[List[str]] = [
+            [BORDER if mark == "X" else UNVISITED for mark in row] for row in board
+        ]
+        for i in range(len(states[0])):
+            if states[0][i] == UNVISITED:
+                states[0][i] = DEAD
+            if states[len(states) - 1][i] == UNVISITED:
+                states[len(states) - 1][i] = DEAD
+        for i in range(len(states)):
+            if states[i][0] == UNVISITED:
+                states[i][0] = DEAD
+            if states[i][len(states[0]) - 1] == UNVISITED:
+                states[i][len(states[0]) - 1] = DEAD
+
+        def BFS(coord: tuple) -> bool:
+            q = deque()
+            q.appendleft(coord)
+            seen.add(coord)
+
+            while q:
+                cur = q.pop()
+                neighbors = [
+                    (cur[0] - 1, cur[1]),
+                    (cur[0] + 1, cur[1]),
+                    (cur[0], cur[1] - 1),
+                    (cur[0], cur[1] + 1),
+                ]
+                for nei in neighbors:
+                    if nei in seen:
+                        continue
+                    if 0 <= nei[0] < len(board) and 0 <= nei[1] < len(board[0]):
+                        if states[nei[0]][nei[1]] == DEAD:
+                            return False
+                        elif states[nei[0]][nei[1]] == BORDER:
+                            continue
+                        else:
+                            q.appendleft(nei)
+                            seen.add(nei)
+                    else:
+                        return False
+            return True
+
+        for row in range(1, len(board) - 1):
+            for col in range(1, len(board[0]) - 1):
+                if states[row][col] == UNVISITED:
+                    if BFS((row, col)):
+                        for r, c in seen:
+                            states[r][c] = BORDER
+                            board[r][c] = "X"
+                    else:
+                        for r, c in seen:
+                            states[r][c] = DEAD
+                    seen.clear()
 
 
 def test_accuracy():
@@ -111,6 +166,36 @@ def test_accuracy():
     assert (
         board8 == expected8
     ), f"Failed for complex case, expected {expected8}, got {board8}"
+
+    # Test Case 9: Complex case
+    board9 = [
+        ["X", "O", "O", "X", "X", "X", "O", "X", "O", "O"],
+        ["X", "O", "X", "X", "X", "X", "X", "X", "X", "X"],
+        ["X", "X", "X", "X", "O", "X", "X", "X", "X", "X"],
+        ["X", "O", "X", "X", "X", "O", "X", "X", "X", "O"],
+        ["O", "X", "X", "X", "O", "X", "O", "X", "O", "X"],
+        ["X", "X", "O", "X", "X", "O", "O", "X", "X", "X"],
+        ["O", "X", "X", "O", "O", "X", "O", "X", "X", "O"],
+        ["O", "X", "X", "X", "X", "X", "O", "X", "X", "X"],
+        ["X", "O", "O", "X", "X", "O", "X", "X", "O", "O"],
+        ["X", "X", "X", "O", "O", "X", "O", "X", "X", "O"],
+    ]
+    expected9 = [
+        ["X", "O", "O", "X", "X", "X", "O", "X", "O", "O"],
+        ["X", "O", "X", "X", "X", "X", "X", "X", "X", "X"],
+        ["X", "X", "X", "X", "X", "X", "X", "X", "X", "X"],
+        ["X", "X", "X", "X", "X", "X", "X", "X", "X", "O"],
+        ["O", "X", "X", "X", "X", "X", "X", "X", "X", "X"],
+        ["X", "X", "X", "X", "X", "X", "X", "X", "X", "X"],
+        ["O", "X", "X", "X", "X", "X", "X", "X", "X", "O"],
+        ["O", "X", "X", "X", "X", "X", "X", "X", "X", "X"],
+        ["X", "X", "X", "X", "X", "X", "X", "X", "O", "O"],
+        ["X", "X", "X", "O", "O", "X", "O", "X", "X", "O"],
+    ]
+    solution.solve(board9)
+    assert (
+        board9 == expected9
+    ), f"Failed for complex case, expected {expected9}, got {board9}"
 
     print("✅ All accuracy tests passed!")
 
