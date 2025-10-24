@@ -8,12 +8,53 @@ is a sequence of words beginWord -> s1 -> s2 -> ... -> sk such that:
 """
 
 import time
+import string
+from collections import deque
 from typing import List
 
 
 class Solution:
     def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
-        pass
+        SIGMA = string.ascii_lowercase
+
+        def GetNeighbors(word: str) -> List[str]:
+            ans = []
+            word = list(word)
+            for i in range(len(word)):
+                orig_char = word[i]
+                for c in SIGMA:
+                    if c == orig_char:
+                        continue
+                    word[i] = c
+                    ans.append("".join(word))
+                word[i] = orig_char
+            return ans
+
+        def BFS() -> int:
+            q = deque()
+            words = set(wordList)
+            words.add(beginWord)
+
+            if endWord not in words:
+                return 0
+            q.appendleft((1, endWord))
+            words.remove(endWord)
+
+            while q:
+                l, cur = q.pop()
+                if cur == beginWord:
+                    return l
+
+                neighbors = GetNeighbors(cur)
+                for nei in neighbors:
+                    if nei not in words:
+                        continue
+                    q.appendleft((l + 1, nei))
+                    words.remove(nei)
+
+            return 0
+
+        return BFS()
 
 
 def test_accuracy():
@@ -179,63 +220,21 @@ def test_edge_cases():
     assert isinstance(result2, int), f"Max constraint failed: {result2}"
     print(f"Maximum constraint: ✅")
 
-    # Edge Case 3: Maximum word length (10 characters)
-    beginWord3 = "a" * 10
-    endWord3 = "b" * 10
-    wordList3 = ["b" * 10]
+    # Edge Case 3: All same words
+    beginWord3 = "abc"
+    endWord3 = "def"
+    wordList3 = ["abc"] * 100
     result3 = solution.ladderLength(beginWord3, endWord3, wordList3)
-    assert result3 == 2, f"Max word length failed: {result3}"
-    print(f"Maximum word length: ✅")
-
-    # Edge Case 4: All same words
-    beginWord4 = "abc"
-    endWord4 = "def"
-    wordList4 = ["abc"] * 100
-    result4 = solution.ladderLength(beginWord4, endWord4, wordList4)
-    assert result4 == 0, f"All same words failed: {result4}"
+    assert result3 == 0, f"All same words failed: {result3}"
     print(f"All same words: ✅")
 
-    # Edge Case 5: No valid transformations
-    beginWord5 = "abc"
-    endWord5 = "xyz"
-    wordList5 = ["def", "ghi", "jkl"]
-    result5 = solution.ladderLength(beginWord5, endWord5, wordList5)
-    assert result5 == 0, f"No valid transformations failed: {result5}"
+    # Edge Case 4: No valid transformations
+    beginWord4 = "abc"
+    endWord4 = "xyz"
+    wordList4 = ["def", "ghi", "jkl"]
+    result4 = solution.ladderLength(beginWord4, endWord4, wordList4)
+    assert result4 == 0, f"No valid transformations failed: {result4}"
     print(f"No valid transformations: ✅")
-
-    # Edge Case 6: Single character words
-    beginWord6 = "a"
-    endWord6 = "z"
-    wordList6 = [
-        "b",
-        "c",
-        "d",
-        "e",
-        "f",
-        "g",
-        "h",
-        "i",
-        "j",
-        "k",
-        "l",
-        "m",
-        "n",
-        "o",
-        "p",
-        "q",
-        "r",
-        "s",
-        "t",
-        "u",
-        "v",
-        "w",
-        "x",
-        "y",
-        "z",
-    ]
-    result6 = solution.ladderLength(beginWord6, endWord6, wordList6)
-    assert result6 == 26, f"Single character words failed: {result6}"
-    print(f"Single character words: ✅")
 
     print("✅ All edge case tests passed!")
 

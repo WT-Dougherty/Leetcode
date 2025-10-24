@@ -40,4 +40,4 @@ Explanation: The endWord "cog" is not in wordList, therefore there is no valid t
 ## Desired Time Complexity
 
 - **Time Complexity**: O(M^2 \* N) where M is the length of each word and N is the total number of words
-- **Space Complexity**: O(M \* N) for the queue and visited set
+- **Space Complexity**: O(M \* N)

@@ -135,7 +135,7 @@ With this in mind, it's always best to start by trying to define your subproblem
 - [x] [Redundant Connection](11_Graphs/redundant-connection/problem.md)
 - [x] [Number of Connected Components In An Undirected Graph](11_Graphs/number-of-connected-components-in-an-undirected-graph/problem.md)
 - [x] [Graph Valid Tree](11_Graphs/graph-valid-tree/problem.md)
-- [ ] [Word Ladder](11_Graphs/word-ladder/problem.md)
+- [x] [Word Ladder](11_Graphs/word-ladder/problem.md)
 
 _Some Notes on This Section:_
 Always opt for DFS when you have a choice in traversal problems. You can use the recursion stack to order your traversal, as opposed to having to maintain some queue for BFS. If you're given a set of (bi)directional relations (edges) between objects, you can probably solve the problem efficiently using graph traversal.
