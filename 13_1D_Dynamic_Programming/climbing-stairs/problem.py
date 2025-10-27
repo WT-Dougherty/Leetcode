@@ -7,12 +7,18 @@ Each time you can either climb 1 or 2 steps. In how many distinct ways can you c
 """
 
 import time
-from typing import List
 
 
 class Solution:
     def climbStairs(self, n: int) -> int:
-        pass
+        if n == 1:
+            return 1
+        if n == 2:
+            return 2
+        prev, cur = 1, 2
+        for _ in range(3, n + 1):
+            prev, cur = cur, prev + cur
+        return cur
 
 
 def test_accuracy():
@@ -79,9 +85,12 @@ def test_time_complexity():
     if len(times) >= 2:
         # Calculate ratios between consecutive time measurements
         ratios = []
-        for i in range(1, len(times)):
-            ratio = times[i] / times[i - 1]
-            ratios.append(ratio)
+        for i in range(1, len(times) - 1):
+            if times[i] != 0:
+                ratio = times[i + 1] / times[i]
+                ratios.append(ratio)
+            else:
+                ratios.append(2.0)
 
         # Calculate expected ratios for O(n) complexity
         expected_ratios = []

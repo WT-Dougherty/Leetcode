@@ -16,7 +16,21 @@ import random
 
 class Solution:
     def isValid(self, s: str) -> bool:
-        pass
+        closers, openers = dict(), set()
+        closers[")"], closers["}"], closers["]"] = "(", "{", "["
+        openers.add("("), openers.add("{"), openers.add("[")
+        stack = []
+
+        for c in s:
+            if c in openers:
+                stack.append(c)
+            elif c in closers:
+                if stack and stack.pop() == closers[c]:
+                    continue
+                return False
+            else:
+                return False
+        return len(stack) == 0
 
 
 def test_accuracy():

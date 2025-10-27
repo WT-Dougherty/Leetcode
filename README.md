@@ -43,7 +43,7 @@ With this in mind, it's always best to start by trying to define your subproblem
 
 ## Stack (7)
 
-- [ ] [Valid Parentheses](04_Stack/valid-parentheses/problem.md)
+- [x] [Valid Parentheses](04_Stack/valid-parentheses/problem.md)
 - [ ] [Min Stack](04_Stack/min-stack/problem.md)
 - [ ] [Evaluate Reverse Polish Notation](04_Stack/evaluate-reverse-polish-notation/problem.md)
 - [ ] [Generate Parentheses](04_Stack/generate-parentheses/problem.md)
@@ -78,15 +78,15 @@ With this in mind, it's always best to start by trying to define your subproblem
 ## Trees (15)
 
 - [ ] [Invert Binary Tree](07_Trees/invert-binary-tree/problem.md)
-- [ ] [Maximum Depth of Binary Tree](07_Trees/maximum-depth-of-binary-tree/problem.md)
+- [x] [Maximum Depth of Binary Tree](07_Trees/maximum-depth-of-binary-tree/problem.md)
 - [ ] [Diameter of Binary Tree](07_Trees/diameter-of-binary-tree/problem.md)
 - [ ] [Balanced Binary Tree](07_Trees/balanced-binary-tree/problem.md)
-- [ ] [Same Tree](07_Trees/same-tree/problem.md)
+- [x] [Same Tree](07_Trees/same-tree/problem.md)
 - [ ] [Subtree of Another Tree](07_Trees/subtree-of-another-tree/problem.md)
 - [ ] [Lowest Common Ancestor of a Binary Search Tree](07_Trees/lowest-common-ancestor-of-a-binary-search-tree/problem.md)
 - [ ] [Binary Tree Level Order Traversal](07_Trees/binary-tree-level-order-traversal/problem.md)
 - [ ] [Binary Tree Right Side View](07_Trees/binary-tree-right-side-view/problem.md)
-- [ ] [Count Good Nodes In Binary Tree](07_Trees/count-good-nodes-in-binary-tree/problem.md)
+- [x] [Count Good Nodes In Binary Tree](07_Trees/count-good-nodes-in-binary-tree/problem.md)
 - [ ] [Validate Binary Search Tree](07_Trees/validate-binary-search-tree/problem.md)
 - [ ] [Kth Smallest Element In a Bst](07_Trees/kth-smallest-element-in-a-bst/problem.md)
 - [ ] [Construct Binary Tree From Preorder And Inorder Traversal](07_Trees/construct-binary-tree-from-preorder-and-inorder-traversal/problem.md)
@@ -153,7 +153,7 @@ the defaultdict type from the collections library is helpful when creating adjac
 
 ## 1D Dynamic Programming (12)
 
-- [ ] [Climbing Stairs](13_1D_Dynamic_Programming/climbing-stairs/problem.md)
+- [x] [Climbing Stairs](13_1D_Dynamic_Programming/climbing-stairs/problem.md)
 - [ ] [Min Cost Climbing Stairs](13_1D_Dynamic_Programming/min-cost-climbing-stairs/problem.md)
 - [ ] [House Robber](13_1D_Dynamic_Programming/house-robber/problem.md)
 - [ ] [House Robber II](13_1D_Dynamic_Programming/house-robber-ii/problem.md)

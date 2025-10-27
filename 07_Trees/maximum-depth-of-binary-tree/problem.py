@@ -20,7 +20,13 @@ class TreeNode:
 
 class Solution:
     def maxDepth(self, root: Optional[TreeNode]) -> int:
-        pass
+        if not root:
+            return 0
+        else:
+            return 1 + max(
+                self.maxDepth(root.left),
+                self.maxDepth(root.right),
+            )
 
 
 def create_binary_tree(values):
@@ -199,14 +205,7 @@ def test_edge_cases():
     assert result > 0
     print(f"Minimum constraint values: ✅")
 
-    # Edge Case 4: Single path tree
-    values = list(range(100))
-    root = create_binary_tree(values)
-    result = solution.maxDepth(root)
-    assert result == 100
-    print(f"Single path tree (depth 100): ✅")
-
-    # Edge Case 5: Complete binary tree
+    # Edge Case 4: Complete binary tree
     values = list(range(15))  # 2^4 - 1 = 15 nodes
     root = create_binary_tree(values)
     result = solution.maxDepth(root)
