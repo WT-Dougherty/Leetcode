@@ -14,7 +14,14 @@ from typing import List
 
 class Solution:
     def lengthOfLIS(self, nums: List[int]) -> int:
-        pass
+        dp = [1] * len(nums)
+        for i in range(1, len(nums)):
+            j = 0
+            while j < i:
+                if nums[i] > nums[j] and dp[i] < dp[j] + 1:
+                    dp[i] = dp[j] + 1
+                j += 1
+        return max(dp)
 
 
 def test_accuracy():
@@ -152,7 +159,7 @@ def test_edge_cases():
     # Edge Case 3: Maximum value (10^4)
     nums3 = [10000, 1, 2, 3]
     result3 = solution.lengthOfLIS(nums3)
-    assert result3 == 4, f"Max value failed: {result3}"
+    assert result3 == 3, f"Max value failed: {result3}"
     print(f"Maximum value: ✅")
 
     # Edge Case 4: Minimum value (-10^4)
@@ -170,7 +177,7 @@ def test_edge_cases():
     # Edge Case 6: Mixed positive and negative
     nums6 = [-1, 0, 1, -2, 2]
     result6 = solution.lengthOfLIS(nums6)
-    assert result6 == 3, f"Mixed values failed: {result6}"
+    assert result6 == 4, f"Mixed values failed: {result6}"
     print(f"Mixed values: ✅")
 
     print("✅ All edge case tests passed!")

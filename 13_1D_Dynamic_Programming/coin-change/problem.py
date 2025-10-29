@@ -14,7 +14,23 @@ from typing import List
 
 class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
-        pass
+        coins.sort()
+        dp = [-1] * (amount + 1)
+        dp[0] = 0
+        for amt in range(1, amount + 1):
+            for coin in coins:
+                diff = amt - coin
+                if diff < 0:
+                    break
+                elif dp[diff] == -1:
+                    continue
+                else:
+                    new_val = dp[diff] + 1
+                    if dp[amt] == -1:
+                        dp[amt] = new_val
+                    else:
+                        dp[amt] = min(dp[amt], new_val)
+        return dp[-1]
 
 
 def test_accuracy():

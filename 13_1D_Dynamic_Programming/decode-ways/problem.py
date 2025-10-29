@@ -20,7 +20,6 @@ The test cases are generated so that the answer fits in a 32-bit integer.
 """
 
 import time
-from typing import List
 
 
 class Solution:

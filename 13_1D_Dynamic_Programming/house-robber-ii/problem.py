@@ -18,7 +18,20 @@ from typing import List
 
 class Solution:
     def rob(self, nums: List[int]) -> int:
-        pass
+        def rob1(a: List[int]) -> int:
+            if len(a) < 3:
+                return max(a)
+            dp = [0] * len(a)
+            dp[0] = a[0]
+            dp[1] = max(dp[0], a[1])
+
+            for i in range(2, len(a)):
+                dp[i] = max(dp[i - 1], a[i] + dp[i - 2])
+            return dp[-1]
+
+        if len(nums) < 4:
+            return max(nums)
+        return max(rob1(nums[1:]), rob1(nums[:-1]))
 
 
 def test_accuracy():
