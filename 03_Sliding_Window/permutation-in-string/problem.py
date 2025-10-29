@@ -7,12 +7,33 @@ In other words, one of s1's permutations is the substring of s2.
 """
 
 import time
+from collections import defaultdict
 import random
 
 
 class Solution:
     def checkInclusion(self, s1: str, s2: str) -> bool:
-        pass
+        if len(s1) > len(s2):
+            return False
+
+        s1Map = defaultdict(int)
+        s2Map = defaultdict(int)
+        for c in s1:
+            s1Map[c] += 1
+
+        for i in range(len(s1)):
+            if s2[i] in s1Map:
+                s2Map[s2[i]] += 1
+
+        for i in range(len(s1), len(s2)):
+            if s1Map == s2Map:
+                return True
+
+            if s2[i] in s1Map:
+                s2Map[s2[i]] += 1
+            if s2[i - len(s1)] in s1Map:
+                s2Map[s2[i - len(s1)]] -= 1
+        return s1Map == s2Map
 
 
 def test_accuracy():
