@@ -145,7 +145,7 @@ the defaultdict type from the collections library is helpful when creating adjac
 ## Advanced Graphs (6)
 
 - [ ] [Reconstruct Itinerary](12_Advanced_Graphs/reconstruct-itinerary/problem.md)
-- [ ] [Min Cost to Connect All Points](12_Advanced_Graphs/min-cost-to-connect-all-points/problem.md)
+- [x] [Min Cost to Connect All Points](12_Advanced_Graphs/min-cost-to-connect-all-points/problem.md)
 - [ ] [Network Delay Time](12_Advanced_Graphs/network-delay-time/problem.md)
 - [ ] [Swim In Rising Water](12_Advanced_Graphs/swim-in-rising-water/problem.md)
 - [ ] [Alien Dictionary](12_Advanced_Graphs/alien-dictionary/problem.md)
@@ -200,7 +200,7 @@ the defaultdict type from the collections library is helpful when creating adjac
 - [ ] [Meeting Rooms II](16_Intervals/meeting-rooms-ii/problem.md)
 - [ ] [Minimum Interval to Include Each Query](16_Intervals/minimum-interval-to-include-each-query/problem.md)
 
-## Math & Geometry (8)
+## Math & Geometry (7)
 
 - [ ] [Rotate Image](17_Math_&_Geometry/rotate-image/problem.md)
 - [ ] [Spiral Matrix](17_Math_&_Geometry/spiral-matrix/problem.md)

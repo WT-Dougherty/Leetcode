@@ -6,12 +6,38 @@ where points[i] = [xi, yi].
 """
 
 import time
+import heapq
 from typing import List
 
 
 class Solution:
     def minCostConnectPoints(self, points: List[List[int]]) -> int:
-        pass
+        # Helper function to calculate distance
+        def calcDist(p1: List[int], p2: List[int]) -> int:
+            return abs(p1[0] - p2[0]) + abs(p1[1] - p2[1])
+
+        # function variables
+        n = len(points)
+        min_heap = [(0, 0)]
+        ans = 0
+        seen = set()
+
+        while len(seen) < n:
+            d, node = heapq.heappop(min_heap)
+            if node in seen:
+                continue
+
+            seen.add(node)
+            ans += d
+
+            for nei_node in range(n):
+                if nei_node == node:
+                    continue
+                heapq.heappush(
+                    min_heap, (calcDist(points[node], points[nei_node]), nei_node)
+                )
+
+        return ans
 
 
 def test_accuracy():
@@ -108,7 +134,9 @@ def test_time_complexity():
             expected_ratios.append(expected_ratio)
 
         print(f"\nTime ratios: {[f'{r:.2f}x' for r in ratios]}")
-        print(f"Expected ratios for O(n^2*log n): {[f'{r:.2f}x' for r in expected_ratios]}")
+        print(
+            f"Expected ratios for O(n^2*log n): {[f'{r:.2f}x' for r in expected_ratios]}"
+        )
 
         # Check if ratios are within acceptable range
         tolerance = 3.0  # Allow 300% variance
@@ -156,13 +184,13 @@ def test_edge_cases():
     print(f"Maximum constraint: ✅")
 
     # Edge Case 3: Maximum coordinate values
-    points3 = [[-10**6, -10**6], [10**6, 10**6]]
+    points3 = [[-(10**6), -(10**6)], [10**6, 10**6]]
     result3 = solution.minCostConnectPoints(points3)
     assert result3 == 4 * 10**6, f"Max coordinates failed: {result3}"
     print(f"Maximum coordinates: ✅")
 
     # Edge Case 4: Minimum coordinate values
-    points4 = [[-10**6, -10**6], [-10**6, -10**6]]
+    points4 = [[-(10**6), -(10**6)], [-(10**6), -(10**6)]]
     result4 = solution.minCostConnectPoints(points4)
     assert result4 == 0, f"Min coordinates failed: {result4}"
     print(f"Minimum coordinates: ✅")
