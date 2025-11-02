@@ -101,7 +101,7 @@ With this in mind, it's always best to start by trying to define your subproblem
 
 ## Heap / Priority Queue (7)
 
-- [ ] [Kth Largest Element In a Stream](09_Heap_or_Priority_Queue/kth-largest-element-in-a-stream/problem.md)
+- [x] [Kth Largest Element In a Stream](09_Heap_or_Priority_Queue/kth-largest-element-in-a-stream/problem.md)
 - [ ] [Last Stone Weight](09_Heap_or_Priority_Queue/last-stone-weight/problem.md)
 - [ ] [K Closest Points to Origin](09_Heap_or_Priority_Queue/k-closest-points-to-origin/problem.md)
 - [ ] [Kth Largest Element In An Array](09_Heap_or_Priority_Queue/kth-largest-element-in-an-array/problem.md)

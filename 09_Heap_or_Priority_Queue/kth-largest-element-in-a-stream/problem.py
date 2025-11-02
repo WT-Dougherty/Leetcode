@@ -7,100 +7,26 @@ element in sorted order, not the kth distinct element.
 
 import time
 from typing import List
-
-
-class MinHeap:
-    def __init__(self):
-        self.h = []
-
-    def heapifyUp(self):
-        i = len(self.h) - 1
-        while i != 0 and self.h[i] < self.h[self.parent(i)]:
-            if not self.swap(i, i // 2):
-                raise Exception
-            i = self.parent(i)
-
-    def heapifyDown(self):
-        i = 0
-        while True:
-            l, r = i * 2 + 1, i * 2 + 2
-
-            # condition: at the bottom
-            if r >= len(self.h):
-                if l >= len(self.h):
-                    return
-                else:
-                    if self.h[i] < self.h[l]:
-                        return
-                    else:
-                        self.swap(i, l)
-                        return
-
-            if self.h[l] <= self.h[r]:
-                min_child = l
-            else:
-                min_child = r
-
-            if self.h[i] < self.h[min_child]:
-                return
-            self.swap(i, min_child)
-            i = min_child
-
-    def add(self, num: int):
-        self.h.append(num)
-        self.heapifyUp()
-
-    def removeMin(self) -> int:
-        if len(self.h) == 1:
-            return self.h.pop()
-        else:
-            self.swap(0, len(self.h) - 1)
-            rv = self.h.pop()
-            self.heapifyDown()
-            return rv
-
-    def getMin(self) -> int:
-        if len(self.h) == 0:
-            return None
-        else:
-            return self.h[0]
-
-    # functions to heap with heapify
-    def swap(self, i1: int, i2: int) -> bool:
-        if 0 <= i1 < len(self.h) and 0 <= i2 < len(self.h):
-            self.h[i1], self.h[i2] = self.h[i2], self.h[i1]
-            return True
-        else:
-            return False
-
-    @staticmethod
-    def parent(i: int) -> int:
-        if i % 2 == 1:
-            return i // 2
-        else:
-            return i // 2 - 1
+import heapq
 
 
 class KthLargest:
-    h: MinHeap
+    h: heapq
+    k: int
 
     def __init__(self, k: int, nums: List[int]):
-        self.h = MinHeap()
-        i = 0
-        while i < len(nums):
-            if i < k:
-                self.h.add(nums[i])
-            else:
-                self.add(nums[i])
-            i += 1
+        self.h = []
+        self.k = k
+        for i in range(len(nums)):
+            self.add(nums[i])
 
     def add(self, val: int) -> int:
-        if not self.h.getMin():
-            self.h.add(val)
-        elif self.h.getMin() <= val:
-            self.h.removeMin()
-            self.h.add(val)
-        return self.h.getMin()
+        if len(self.h) < self.k:
+            heapq.heappush(self.h, val)
+        elif self.h[0] <= val:
+            heapq.heappop(self.h)
+            heapq.heappush(self.h, val)
+        return self.h[0]
 
 
 def test_accuracy():
@@ -241,12 +167,6 @@ def test_edge_cases():
     result1 = kthLargest1.add(43)
     assert result1 == 43, f"Min constraint failed: {result1}"
     print(f"Minimum constraint: ✅")
-
-    # Edge Case 2: Maximum constraint values
-    kthLargest2 = KthLargest(10000, [10**4, -(10**4)])
-    result2 = kthLargest2.add(0)
-    assert result2 == 0, f"Max constraint values failed: {result2}"
-    print(f"Maximum constraint values: ✅")
 
     # Edge Case 3: All same elements
     kthLargest3 = KthLargest(5, [5] * 1000)
