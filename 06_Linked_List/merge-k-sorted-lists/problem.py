@@ -8,6 +8,7 @@ Merge all the linked-lists into one sorted linked-list and return it.
 
 import time
 import random
+import heapq
 from typing import List, Optional
 
 
@@ -19,7 +20,33 @@ class ListNode:
 
 class Solution:
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
-        pass
+        # initialize
+        breaker = 0
+        heap = []
+        for i in range(len(lists)):
+            if not lists[i]:
+                continue
+            else:
+                heapq.heappush(heap, (lists[i].val, breaker, lists[i]))
+                breaker += 1
+
+        ret = cur = None
+        while heap:
+            next_val, _, node = heapq.heappop(heap)
+
+            if not ret:
+                ret = ListNode(next_val)
+                cur = ret
+            else:
+                cur.next = ListNode(next_val)
+                cur = cur.next
+
+            if not node.next:
+                continue
+            else:
+                heapq.heappush(heap, (node.next.val, breaker, node.next))
+                breaker += 1
+        return ret
 
 
 def create_linked_list(values):

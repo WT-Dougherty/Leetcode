@@ -47,7 +47,7 @@ With this in mind, it's always best to start by trying to define your subproblem
 - [ ] [Min Stack](04_Stack/min-stack/problem.md)
 - [ ] [Evaluate Reverse Polish Notation](04_Stack/evaluate-reverse-polish-notation/problem.md)
 - [ ] [Generate Parentheses](04_Stack/generate-parentheses/problem.md)
-- [ ] [Daily Temperatures](04_Stack/daily-temperatures/problem.md)
+- [x] [Daily Temperatures](04_Stack/daily-temperatures/problem.md)
 - [ ] [Car Fleet](04_Stack/car-fleet/problem.md)
 - [ ] [Largest Rectangle In Histogram](04_Stack/largest-rectangle-in-histogram/problem.md)
 
@@ -58,7 +58,7 @@ With this in mind, it's always best to start by trying to define your subproblem
 - [x] [Koko Eating Bananas](05_Binary_Search/koko-eating-bananas/problem.md)
 - [ ] [Search In Rotated Sorted Array](05_Binary_Search/search-in-rotated-sorted-array/problem.md)
 - [ ] [Find Minimum In Rotated Sorted Array](05_Binary_Search/find-minimum-in-rotated-sorted-array/problem.md)
-- [ ] [Time Based Key Value Store](05_Binary_Search/time-based-key-value-store/problem.md)
+- [x] [Time Based Key Value Store](05_Binary_Search/time-based-key-value-store/problem.md)
 - [ ] [Median of Two Sorted Arrays](05_Binary_Search/median-of-two-sorted-arrays/problem.md)
 
 ## Linked List (11)
@@ -71,8 +71,8 @@ With this in mind, it's always best to start by trying to define your subproblem
 - [x] [Add Two Numbers](06_Linked_List/add-two-numbers/problem.md)
 - [ ] [Linked List Cycle](06_Linked_List/linked-list-cycle/problem.md)
 - [ ] [Find The Duplicate Number](06_Linked_List/find-the-duplicate-number/problem.md)
-- [ ] [LRU Cache](06_Linked_List/lru-cache/problem.md)
-- [ ] [Merge K Sorted Lists](06_Linked_List/merge-k-sorted-lists/problem.md)
+- [x] [LRU Cache](06_Linked_List/lru-cache/problem.md)
+- [x] [Merge K Sorted Lists](06_Linked_List/merge-k-sorted-lists/problem.md)
 - [ ] [Reverse Nodes In K Group](06_Linked_List/reverse-nodes-in-k-group/problem.md)
 
 ## Trees (15)
@@ -157,7 +157,7 @@ the defaultdict type from the collections library is helpful when creating adjac
 - [ ] [Min Cost Climbing Stairs](13_1D_Dynamic_Programming/min-cost-climbing-stairs/problem.md)
 - [x] [House Robber](13_1D_Dynamic_Programming/house-robber/problem.md)
 - [x] [House Robber II](13_1D_Dynamic_Programming/house-robber-ii/problem.md)
-- [ ] [Longest Palindromic Substring](13_1D_Dynamic_Programming/longest-palindromic-substring/problem.md)
+- [x] [Longest Palindromic Substring](13_1D_Dynamic_Programming/longest-palindromic-substring/problem.md)
 - [ ] [Palindromic Substrings](13_1D_Dynamic_Programming/palindromic-substrings/problem.md)
 - [ ] [Decode Ways](13_1D_Dynamic_Programming/decode-ways/problem.md)
 - [x] [Coin Change](13_1D_Dynamic_Programming/coin-change/problem.md)

@@ -13,7 +13,15 @@ import random
 
 class Solution:
     def dailyTemperatures(self, temperatures: list[int]) -> list[int]:
-        pass
+        stack = []
+        answer = [0] * len(temperatures)
+
+        for i in range(len(temperatures)):
+            while stack and stack[-1][1] < temperatures[i]:
+                index, value = stack.pop()
+                answer[index] = i - index
+            stack.append((i, temperatures[i]))
+        return answer
 
 
 def test_accuracy():
@@ -63,7 +71,7 @@ def test_accuracy():
     # Test Case 6: Decreasing then increasing
     temps6 = [70, 60, 50, 60, 70]
     result6 = solution.dailyTemperatures(temps6)
-    expected6 = [0, 2, 1, 1, 0]
+    expected6 = [0, 3, 1, 1, 0]
     assert (
         result6 == expected6
     ), f"Failed for {temps6}, expected {expected6}, got {result6}"
@@ -87,7 +95,7 @@ def test_accuracy():
     # Test Case 9: Complex case
     temps9 = [34, 80, 80, 34, 34, 80, 80, 80, 80, 34]
     result9 = solution.dailyTemperatures(temps9)
-    expected9 = [1, 0, 0, 1, 1, 0, 0, 0, 0, 0]
+    expected9 = [1, 0, 0, 2, 1, 0, 0, 0, 0, 0]
     assert (
         result9 == expected9
     ), f"Failed for {temps9}, expected {expected9}, got {result9}"

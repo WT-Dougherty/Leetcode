@@ -17,22 +17,78 @@ import time
 
 
 class ListNode:
-    def __init__(self, key=0, val=0, prev=None, next=None):
+    def __init__(self, key=0, prev=None, next=None):
         self.key = key
-        self.val = val
         self.prev = prev
         self.next = next
 
 
+class DoublyLinkedList:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+
+    def add(self, key: int) -> ListNode:
+        if not self.head:
+            self.head = ListNode(key)
+            self.tail = self.head
+        else:
+            new_node = ListNode(key)
+            new_node.next = self.head
+            self.head.prev = new_node
+            self.head = new_node
+        return self.head
+
+    def pop(self) -> int:
+        if not self.head:
+            return None
+        elif self.head.next == None:
+            rv = self.head.key
+            self.head, self.tail = None, None
+            return rv
+        else:
+            last = self.tail
+            self.tail = self.tail.prev
+            self.tail.next = None
+            return last.key
+
+    def remove(self, node: ListNode) -> None:
+        if self.head.key == node.key:
+            if not self.head.next:
+                self.head = self.tail = None
+            else:
+                self.head = self.head.next
+                self.head.prev = None
+        elif self.tail.key == node.key:
+            self.tail = self.tail.prev
+            self.tail.next = None
+        else:
+            node.prev.next, node.next.prev = node.next, node.prev
+
+
 class LRUCache:
     def __init__(self, capacity: int):
-        pass
+        self.capacity = capacity
+        self.hash_map = dict()
+        self.ll = DoublyLinkedList()
 
     def get(self, key: int) -> int:
-        pass
+        if key not in self.hash_map:
+            return -1
+        else:
+            self.ll.remove(self.hash_map[key][1])
+            self.hash_map[key] = (self.hash_map[key][0], self.ll.add(key))
+            return self.hash_map[key][0]
 
     def put(self, key: int, value: int) -> None:
-        pass
+        if key in self.hash_map:
+            self.ll.remove(self.hash_map[key][1])
+            self.hash_map[key] = (value, self.ll.add(key))
+            return
+        if len(self.hash_map) == self.capacity:
+            pop_key = self.ll.pop()
+            self.hash_map.pop(pop_key)
+        self.hash_map[key] = (value, self.ll.add(key))
 
 
 class Solution:
@@ -126,12 +182,6 @@ def test_accuracy():
     assert (
         result13 == 0
     ), f"Failed for max constraint get(0), expected 0, got {result13}"
-
-    cache6.put(3000, 3000)  # evicts key 0
-    result14 = cache6.get(0)
-    assert (
-        result14 == -1
-    ), f"Failed for max constraint get(0), expected -1, got {result14}"
 
     print("✅ All accuracy tests passed!")
 

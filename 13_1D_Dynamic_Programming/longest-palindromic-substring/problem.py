@@ -6,11 +6,38 @@ Given a string s, return the longest palindromic substring in s.
 
 import time
 from typing import List
+import heapq
+
+heapq.heappush()
 
 
 class Solution:
     def longestPalindrome(self, s: str) -> str:
-        pass
+        max_pal = ""
+
+        def Search(l: int, r: int):
+            nonlocal max_pal
+            while l >= 0 and r < len(s):
+                if s[l] != s[r]:
+                    break
+                if r - l + 1 > len(max_pal):
+                    max_pal = s[l : r + 1]
+                l -= 1
+                r += 1
+
+        for i in range(len(s)):
+            # odd length palindomes
+            l = r = i
+            Search(l, r)
+
+            # even length palindromes
+            if i + 1 == len(s):
+                continue
+            l = i
+            r = i + 1
+            Search(l, r)
+
+        return max_pal
 
 
 def test_accuracy():
