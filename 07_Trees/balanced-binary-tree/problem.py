@@ -21,7 +21,15 @@ class TreeNode:
 
 class Solution:
     def isBalanced(self, root: Optional[TreeNode]) -> bool:
-        pass
+        def maxDepth(root: Optional[TreeNode], depth: int = 0) -> int:
+            if not root:
+                return depth
+            l, r = maxDepth(root.left, depth + 1), maxDepth(root.right, depth + 1)
+            if l == -1 or r == -1 or abs(l - r) > 1:
+                return -1
+            return max(l, r)
+
+        return maxDepth(root) != -1
 
 
 def create_binary_tree(values):

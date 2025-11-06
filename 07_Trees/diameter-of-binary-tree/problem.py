@@ -22,7 +22,19 @@ class TreeNode:
 
 class Solution:
     def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
-        pass
+        diameter = 0
+
+        def findDiameter(root: Optional[TreeNode], depth: int = 0) -> int:
+            nonlocal diameter
+            if not root:
+                return -1
+            l, r = 1 + findDiameter(root.left), 1 + findDiameter(root.right)
+            if l + r > diameter:
+                diameter = l + r
+            return max(l, r)
+
+        findDiameter(root)
+        return diameter
 
 
 def create_binary_tree(values):
@@ -199,12 +211,12 @@ def test_edge_cases():
     assert result >= 0
     print(f"Minimum constraint values: ✅")
 
-    # Edge Case 4: Single path tree
+    # Edge Case 4: Large Tree
     values = list(range(100))
     root = create_binary_tree(values)
     result = solution.diameterOfBinaryTree(root)
-    assert result == 99  # 100 nodes, 99 edges
-    print(f"Single path tree (diameter 99): ✅")
+    assert result == 12  # 100 nodes, 99 edges
+    print(f"Large Tree: ✅")
 
     # Edge Case 5: Complete binary tree
     values = list(range(15))  # 2^4 - 1 = 15 nodes

@@ -79,8 +79,8 @@ With this in mind, it's always best to start by trying to define your subproblem
 
 - [ ] [Invert Binary Tree](07_Trees/invert-binary-tree/problem.md)
 - [x] [Maximum Depth of Binary Tree](07_Trees/maximum-depth-of-binary-tree/problem.md)
-- [ ] [Diameter of Binary Tree](07_Trees/diameter-of-binary-tree/problem.md)
-- [ ] [Balanced Binary Tree](07_Trees/balanced-binary-tree/problem.md)
+- [x] [Diameter of Binary Tree](07_Trees/diameter-of-binary-tree/problem.md)
+- [x] [Balanced Binary Tree](07_Trees/balanced-binary-tree/problem.md)
 - [x] [Same Tree](07_Trees/same-tree/problem.md)
 - [ ] [Subtree of Another Tree](07_Trees/subtree-of-another-tree/problem.md)
 - [ ] [Lowest Common Ancestor of a Binary Search Tree](07_Trees/lowest-common-ancestor-of-a-binary-search-tree/problem.md)
