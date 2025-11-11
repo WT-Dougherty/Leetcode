@@ -44,7 +44,7 @@ With this in mind, it's always best to start by trying to define your subproblem
 ## Stack (7)
 
 - [x] [Valid Parentheses](04_Stack/valid-parentheses/problem.md)
-- [ ] [Min Stack](04_Stack/min-stack/problem.md)
+- [x] [Min Stack](04_Stack/min-stack/problem.md)
 - [ ] [Evaluate Reverse Polish Notation](04_Stack/evaluate-reverse-polish-notation/problem.md)
 - [ ] [Generate Parentheses](04_Stack/generate-parentheses/problem.md)
 - [x] [Daily Temperatures](04_Stack/daily-temperatures/problem.md)

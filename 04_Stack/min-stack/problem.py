@@ -19,19 +19,24 @@ import random
 
 class MinStack:
     def __init__(self):
-        pass
+        self.stack = []
+        self.record = []
 
     def push(self, val: int) -> None:
-        pass
+        self.stack.append(val)
+        if not self.record or self.record[-1] >= val:
+            self.record.append(val)
 
     def pop(self) -> None:
-        pass
+        val = self.stack.pop()
+        if self.record and self.record[-1] == val:
+            self.record.pop()
 
     def top(self) -> int:
-        pass
+        return self.stack[-1]
 
     def getMin(self) -> int:
-        pass
+        return self.record[-1]
 
 
 def test_accuracy():
